@@ -9,6 +9,8 @@ export interface CharachterProps {
   name: string;
   birth_year: string;
   eye_color: string;
+  skin_color: string;
+  gender: string;
 }
 
 export interface AppState {

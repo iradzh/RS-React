@@ -1,15 +1,36 @@
 .char {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 2em 0;
-  width: 10em;
+  width: 15em;
   border-radius: 12px;
-  transition: all ease 0.1s;
+  transition: all ease 0.3s;
   color: black;
-  padding: 0.4em;
   background-color: white;
   &:hover {
+    transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
-  h1 {
-    font-size: 1.4em;
+ 
+}
+
+.char__name {
+  width: 100%;
+  margin: 0;
+  padding: 6px 0 6px 12px;
+  border-radius: 12px 12px 0 0;
+  color: #3e3952;
+  background-color: #e9dce1;
+  font-size: 1.4em;
+  box-sizing: border-box;
+}
+
+.char__text {
+  margin: 0.6em;
+  span {
+    font-weight: 800;
+    color: #3e3952;
   }
 }

@@ -41,6 +41,8 @@ class App extends Component<object, AppState> {
                     name={data.name}
                     birth_year={data.birth_year}
                     eye_color={data.eye_color}
+                    skin_color={data.skin_color}
+                    gender={data.gender}
                     key={index}
                   />
                 )

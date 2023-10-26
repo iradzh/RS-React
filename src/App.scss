@@ -6,14 +6,17 @@
 .header {
   display: flex;
   justify-content: center;
-  background-color: #646cffaa;
+  height: 4em;
+  background-color: #3e3952;
 }
 
 .main {
   display: flex;
   justify-content: center;
-  background-color: #61dafbaa;
+  align-items: center;
+  background-color: #000000aa;
   width: 100%;
+  min-height: calc(100vh - 4em);
 }
 
 .main__container {
@@ -21,7 +24,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 90%;
-  gap: 1em;
+  gap: 2em;
 }
 
 .search__btn,
