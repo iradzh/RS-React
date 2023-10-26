@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import getData from './service';
-import { AppState, result } from './types/constants';
+import { AppState, CharachterProps } from './types/constants';
+import Character from './components/Character/Charachter';
+import Spinner from './components/Spinner/Spinner';
+import './App.scss';
 
 class App extends Component<object, AppState> {
   constructor(props: object) {
@@ -29,16 +32,20 @@ class App extends Component<object, AppState> {
           <button className="search__btn">Search</button>
         </div>
         <div className="main">
-          <h3>{this.state.data ? this.state.data.name : 'Loading...'}</h3>
-          <ul>
+          {this.state.data ? this.state.data.name : <Spinner />}
+          <div className="main__container">
             {this.state.data &&
-              this.state.data.results.map((result: result, index: number) => (
-                <li key={index}>
-                  <h3>{result.name}</h3>
-                  <h3>{result.birth_year}</h3>
-                </li>
-              ))}
-          </ul>
+              this.state.data.results.map(
+                (data: CharachterProps, index: number) => (
+                  <Character
+                    name={data.name}
+                    birth_year={data.birth_year}
+                    eye_color={data.eye_color}
+                    key={index}
+                  />
+                )
+              )}
+          </div>
         </div>
       </div>
     );

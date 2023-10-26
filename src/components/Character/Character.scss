@@ -1,0 +1,15 @@
+.char {
+  margin: 2em 0;
+  width: 10em;
+  border-radius: 12px;
+  transition: all ease 0.1s;
+  color: black;
+  padding: 0.4em;
+  background-color: white;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  h1 {
+    font-size: 1.4em;
+  }
+}

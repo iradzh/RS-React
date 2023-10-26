@@ -5,13 +5,14 @@ export class MyError extends Error {
   }
 }
 
-export interface result {
+export interface CharachterProps {
   name: string;
   birth_year: string;
+  eye_color: string;
 }
 
 export interface AppState {
   searchTerm: string;
-  searchResults: result[];
-  data: result | null;
+  searchResults: CharachterProps[];
+  data: CharachterProps | null;
 }
