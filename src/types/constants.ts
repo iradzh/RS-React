@@ -5,7 +5,7 @@ export class MyError extends Error {
   }
 }
 
-export interface CharachterProps {
+export interface Charachter {
   name: string;
   birth_year: string;
   eye_color: string;
@@ -15,6 +15,6 @@ export interface CharachterProps {
 
 export interface AppState {
   searchTerm: string;
-  searchResults: CharachterProps[];
-  data: CharachterProps | null;
+  searchResults: Charachter[];
+  data: Charachter | null;
 }

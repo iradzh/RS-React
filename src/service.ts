@@ -1,11 +1,9 @@
-import { result } from './types/constants';
+import { Charachter } from './types/constants';
 
 const url = 'https://swapi.dev/api/people/';
-
-async function getData(): Promise<result> {
+async function getData(): Promise<Charachter> {
   const response = await fetch(url);
   const data = await response.json();
-  console.log('HERE', data);
   return data;
 }
 
