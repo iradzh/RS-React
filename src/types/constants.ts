@@ -5,7 +5,8 @@ export class MyError extends Error {
   }
 }
 
-export interface Charachter {
+export interface ICharacter {
+  id: number;
   name: string;
   birth_year: string;
   eye_color: string;
@@ -13,8 +14,19 @@ export interface Charachter {
   gender: string;
 }
 
+export interface ICharacterProps {
+  char: ICharacter;
+  key: number;
+}
+
+export interface ICharacterListProps {
+  characters: ICharacter[];
+  loading: boolean;
+}
+
 export interface AppState {
-  searchTerm: string;
-  searchResults: Charachter[];
-  data: Charachter | null;
+  searchChar: string;
+  searchResults: ICharacter[];
+  loading: boolean;
+  charList: ICharacter[];
 }

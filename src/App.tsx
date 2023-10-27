@@ -1,30 +1,55 @@
 import React, { Component } from 'react';
-import getData from './service';
-import { AppState, Charachter } from './types/constants';
-import Character from './components/Character/Charachter';
-import Spinner from './components/Spinner/Spinner';
+import { AppState, ICharacter } from './types/constants';
+import CharacterList from './components/CharacterList/CharacterList';
 import './App.scss';
+import CharachterService from './api/service';
 
 class App extends Component<object, AppState> {
+  charService = new CharachterService();
+
   constructor(props: object) {
     super(props);
     this.state = {
-      searchTerm: '',
+      searchChar: '',
       searchResults: [],
-      data: null,
+      loading: true,
+      charList: [],
     };
   }
-
-  async componentDidMount() {
-    try {
-      const data = await getData();
-      this.setState({ data });
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  componentDidMount() {
+    this.onRequest();
   }
 
+  onRequest = () => {
+    this.charService.getAllCharacters().then(this.onCharListLoaded);
+    // .catch(this.onError);
+  };
+
+  onCharListLoaded = (newCharList: ICharacter[]) => {
+    this.setState({ charList: newCharList, loading: false });
+  };
+
+  searchCharacters = () => {
+    this.setState({ loading: true });
+    this.charService
+      .searchCharacter(this.state.searchChar)
+      .then((searchResults: ICharacter[]) => {
+        this.setState({ searchResults, loading: false });
+        if (searchResults.length > 0) {
+          this.setState({ charList: searchResults });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ searchResults: [], loading: false });
+      });
+  };
+
   render() {
+    const { searchResults, charList, loading } = this.state;
+    const charactersToDisplay =
+      searchResults.length > 0 ? searchResults : charList;
+
     return (
       <div className="app">
         <div className="header">
@@ -32,25 +57,14 @@ class App extends Component<object, AppState> {
             type="text"
             placeholder="Explore Star Wars characters"
             className="search__input"
+            value={this.state.searchChar}
+            onChange={(e) => this.setState({ searchChar: e.target.value })}
           />
-          <button className="search__btn">Search</button>
+          <button className="search__btn" onClick={this.searchCharacters}>
+            Search
+          </button>
         </div>
-        <div className="main">
-          {this.state.data ? this.state.data.name : <Spinner />}
-          <div className="main__container">
-            {this.state.data &&
-              this.state.data.results.map((data: Charachter, index: number) => (
-                <Character
-                  name={data.name}
-                  birth_year={data.birth_year}
-                  eye_color={data.eye_color}
-                  skin_color={data.skin_color}
-                  gender={data.gender}
-                  key={index}
-                />
-              ))}
-          </div>
-        </div>
+        <CharacterList characters={charactersToDisplay} loading={loading} />
       </div>
     );
   }
