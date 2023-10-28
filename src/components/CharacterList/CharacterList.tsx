@@ -9,7 +9,9 @@ import './CharacterList.scss';
 
 class CharacterList extends Component<ICharacterListProps> {
   generateUniqueKey = () => {
-    return Math.floor(Math.random() * 1000) + 1;
+    return (
+      Math.floor(Math.random() * 1000) + Math.floor(Math.random() * 1000) + 1
+    );
   };
 
   renderCharacters(characters: ICharacter[]) {
@@ -25,7 +27,7 @@ class CharacterList extends Component<ICharacterListProps> {
     const items = characters.map((char: ICharacter) => {
       return <Character char={char} key={this.generateUniqueKey()} />;
     });
-    return <ul>{items}</ul>;
+    return <div className='char_list'>{items}</div>;
   }
 
   render() {
@@ -35,9 +37,7 @@ class CharacterList extends Component<ICharacterListProps> {
       return <Spinner />;
     }
 
-    return (
-      <div className='main__container'>{this.renderCharacters(characters)}</div>
-    );
+    return <div className='main'>{this.renderCharacters(characters)}</div>;
   }
 }
 

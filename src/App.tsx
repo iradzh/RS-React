@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import CharachterService from './api/service';
 import CharacterList from './components/CharacterList/CharacterList';
-import './App.scss';
 import './components/SearchBar/SearchBar.scss';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import ErrorTriggerButton from './components/ErrorTrigger/ErrorTrigger';
@@ -80,9 +79,7 @@ class App extends Component<object, AppState> {
           onClear={this.clearSearch}
           onInputChange={(e) => this.setState({ searchChar: e.target.value })}
         />
-
         <ErrorTriggerButton />
-
         <CharacterList characters={charactersToDisplay} loading={loading} />
       </ErrorBoundary>
     );
