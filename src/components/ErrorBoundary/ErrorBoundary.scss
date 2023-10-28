@@ -36,20 +36,24 @@
   }
 }
 
-.error_trigger__btn {
-  margin: 1em auto 0 auto;
-  height: 2em;
-  width: 8em;
-  font-size: 1em;
-  font-weight: 800;
-  border-radius: 8px;
-  border: 2px solid #ff4343;
-  color: #ff4343;
-  background-color: #1f0c10;
-  transition: all ease 0.2s;
+.error_trigger {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  button {
+    height: 2em;
+    width: 8em;
+    font-size: 1em;
+    font-weight: 800;
+    border-radius: 8px;
+    border: 2px solid #ff4343;
+    color: #ff4343;
+    background-color: #1f0c10;
+    transition: all ease 0.2s;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
   }
 }

@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export interface ICharacter {
   id: number;
   name: string;
@@ -30,4 +32,15 @@ export interface IErrBoundProps {
 
 export interface IErrBoundState {
   hasError: boolean;
+}
+
+export interface ISearchBarProps {
+  searchChar: string;
+  onSearch: (searchChar: string) => void;
+  onClear: () => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface ISearchBarState {
+  searchChar: string;
 }

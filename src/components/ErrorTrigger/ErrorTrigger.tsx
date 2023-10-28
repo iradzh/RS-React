@@ -24,9 +24,9 @@ class ErrorTriggerButton extends Component<
       throw new Error('Error demonstration');
     }
     return (
-      <button onClick={this.handleClick} className='error_trigger__btn'>
-        Throw Error
-      </button>
+      <div className='error_trigger'>
+        <button onClick={this.handleClick}>Throw Error</button>
+      </div>
     );
   }
 }
