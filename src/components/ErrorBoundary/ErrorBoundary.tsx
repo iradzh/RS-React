@@ -19,13 +19,20 @@ class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
     this.setState({ hasError: true });
   }
 
+  resetError = () => {
+    this.setState({ hasError: false });
+  };
+
   render() {
     if (this.state.hasError) {
       return (
         <div className='error_boundary'>
           <h1>Error, we have, hmmm.</h1>
           <h1>Try once more, you should. Mmm, yes.</h1>
-          <img src={yoda} alt='darth' className='error_img' />
+          <img src={yoda} alt='yoda' className='error_img' />
+          <button onClick={this.resetError} className='error_boundary__reset'>
+            Reset
+          </button>
         </div>
       );
     }

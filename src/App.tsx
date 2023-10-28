@@ -4,6 +4,7 @@ import CharachterService from './api/service';
 import CharacterList from './components/CharacterList/CharacterList';
 import './App.scss';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorTriggerButton from './components/ErrorTrigger/ErrorTrigger';
 import { AppState, ICharacter } from './types/interfaces';
 
 class App extends Component<object, AppState> {
@@ -68,6 +69,8 @@ class App extends Component<object, AppState> {
               Search
             </button>
           </div>
+          <ErrorTriggerButton />
+
           <CharacterList characters={charactersToDisplay} loading={loading} />
         </div>
       </ErrorBoundary>

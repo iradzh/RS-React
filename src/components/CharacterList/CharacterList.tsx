@@ -1,10 +1,9 @@
+import React, { Component } from 'react';
 
-import React, { Component } from "react";
-
-import { ICharacter } from "../../types/interfaces";
-import { ICharacterListProps } from "../../types/interfaces";
-import Character from "../Character/Charachter";
-import Spinner from "../Spinner/Spinner";
+import { ICharacter } from '../../types/interfaces';
+import { ICharacterListProps } from '../../types/interfaces';
+import Character from '../Character/Charachter';
+import Spinner from '../Spinner/Spinner';
 
 class CharacterList extends Component<ICharacterListProps> {
   generateUniqueKey = () => {
@@ -30,7 +29,7 @@ class CharacterList extends Component<ICharacterListProps> {
     }
 
     return (
-      <div className="main__container">{this.renderCharacters(characters)}</div>
+      <div className='main__container'>{this.renderCharacters(characters)}</div>
     );
   }
 }
