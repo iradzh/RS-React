@@ -1,5 +1,5 @@
 class CharachterService {
-  apiUrl = 'https://swapi.dev/api/people/';
+  apiUrl = "https://swapi.dev/api/people/";
 
   connectToApi = async (url: string) => {
     const response = await fetch(url);
@@ -11,7 +11,7 @@ class CharachterService {
 
   searchCharacter = async (searchChar: string) => {
     const response = await this.connectToApi(
-      `${this.apiUrl}?search=${searchChar}`
+      `${this.apiUrl}?search=${searchChar}`,
     );
     return response.results;
   };

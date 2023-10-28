@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { AppState, ICharacter } from './types/constants';
+
+import CharachterService from './api/service';
 import CharacterList from './components/CharacterList/CharacterList';
 import './App.scss';
-import CharachterService from './api/service';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import { AppState, ICharacter } from './types/interfaces';
 
 class App extends Component<object, AppState> {
   charService = new CharachterService();
@@ -35,6 +37,7 @@ class App extends Component<object, AppState> {
       .searchCharacter(this.state.searchChar)
       .then((searchResults: ICharacter[]) => {
         this.setState({ searchResults, loading: false });
+
         if (searchResults.length > 0) {
           this.setState({ charList: searchResults });
         }
@@ -51,21 +54,23 @@ class App extends Component<object, AppState> {
       searchResults.length > 0 ? searchResults : charList;
 
     return (
-      <div className="app">
-        <div className="header">
-          <input
-            type="text"
-            placeholder="Explore Star Wars characters"
-            className="search__input"
-            value={this.state.searchChar}
-            onChange={(e) => this.setState({ searchChar: e.target.value })}
-          />
-          <button className="search__btn" onClick={this.searchCharacters}>
-            Search
-          </button>
+      <ErrorBoundary>
+        <div className='app'>
+          <div className='header'>
+            <input
+              type='text'
+              placeholder='Explore Star Wars characters'
+              className='search__input'
+              value={this.state.searchChar}
+              onChange={(e) => this.setState({ searchChar: e.target.value })}
+            />
+            <button className='search__btn' onClick={this.searchCharacters}>
+              Search
+            </button>
+          </div>
+          <CharacterList characters={charactersToDisplay} loading={loading} />
         </div>
-        <CharacterList characters={charactersToDisplay} loading={loading} />
-      </div>
+      </ErrorBoundary>
     );
   }
 }

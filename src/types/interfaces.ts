@@ -1,10 +1,3 @@
-export class MyError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'MyError';
-  }
-}
-
 export interface ICharacter {
   id: number;
   name: string;
@@ -29,4 +22,12 @@ export interface AppState {
   searchResults: ICharacter[];
   loading: boolean;
   charList: ICharacter[];
+}
+
+export interface IErrBoundProps {
+  children: React.ReactNode;
+}
+
+export interface IErrBoundState {
+  hasError: boolean;
 }
