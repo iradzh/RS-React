@@ -1,7 +1,8 @@
+import './ErrorBoundary.scss';
+
 import React, { Component, ErrorInfo } from 'react';
 
 import yoda from '../../assets/yoda.png';
-import './ErrorBoundary.scss';
 import { IErrBoundProps, IErrBoundState } from '../../types/interfaces';
 
 class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {

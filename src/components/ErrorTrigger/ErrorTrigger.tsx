@@ -1,7 +1,8 @@
+import './ErrorTrigger.scss';
+
 import React, { Component } from 'react';
 
 import Star from '../../assets/star.png';
-import './ErrorTrigger.scss';
 import { IErrorTriggerProps, IErrorTriggerState } from '../../types/interfaces';
 
 class ErrorTriggerButton extends Component<

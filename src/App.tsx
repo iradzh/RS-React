@@ -1,14 +1,15 @@
+import './components/SearchBar/SearchBar.scss';
+
 import React, { Component } from 'react';
 
 import CharachterService from './api/service';
 import CharacterList from './components/CharacterList/CharacterList';
-import './components/SearchBar/SearchBar.scss';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import ErrorTriggerButton from './components/ErrorTrigger/ErrorTrigger';
 import SearchBar from './components/SearchBar/Searchbar';
-import { AppState, ICharacter } from './types/interfaces';
+import { IAppState, ICharacter } from './types/interfaces';
 
-class App extends Component<object, AppState> {
+class App extends Component<object, IAppState> {
   charService = new CharachterService();
 
   constructor(props: object) {

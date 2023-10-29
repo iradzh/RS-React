@@ -19,7 +19,7 @@ export interface ICharacterListProps {
   loading: boolean;
 }
 
-export interface AppState {
+export interface IAppState {
   searchChar: string;
   searchResults: ICharacter[];
   loading: boolean;

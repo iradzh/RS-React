@@ -1,7 +1,8 @@
+import "./Character.scss";
+
 import React, { Component } from "react";
 
 import { ICharacterProps } from "../../types/interfaces";
-import "./Character.scss";
 
 class Character extends Component<ICharacterProps> {
   render() {

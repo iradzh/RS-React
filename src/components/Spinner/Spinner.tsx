@@ -1,6 +1,7 @@
+import './Spinner.scss';
+
 import React, { Component } from 'react';
 
-import './Spinner.scss';
 import luke from '../../assets/luke.png';
 
 class Spinner extends Component {
