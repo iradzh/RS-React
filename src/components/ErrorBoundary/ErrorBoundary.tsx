@@ -1,6 +1,6 @@
 import "./ErrorBoundary.scss";
 
-import React, { Component, ErrorInfo } from "react";
+import { Component, ErrorInfo } from "react";
 
 import yoda from "../../assets/yoda.png";
 import { IErrBoundProps, IErrBoundState } from "../../types/interfaces";

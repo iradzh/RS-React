@@ -1,6 +1,6 @@
 import "./ErrorTrigger.scss";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import Star from "../../assets/star.png";
 import { IErrorTriggerProps, IErrorTriggerState } from "../../types/interfaces";

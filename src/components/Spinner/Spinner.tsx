@@ -1,6 +1,6 @@
 import "./Spinner.scss";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import luke from "../../assets/luke.png";
 

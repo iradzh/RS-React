@@ -1,6 +1,6 @@
 import "./components/SearchBar/SearchBar.scss";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import CharachterService from "./api/service";
 import CharacterList from "./components/CharacterList/CharacterList";

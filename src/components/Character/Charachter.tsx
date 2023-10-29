@@ -1,6 +1,6 @@
 import "./Character.scss";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { ICharacterProps } from "../../types/interfaces";
 

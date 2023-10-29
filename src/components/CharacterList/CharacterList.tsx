@@ -1,10 +1,9 @@
 import "./CharacterList.scss";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import gial from "../../assets/gial.png";
-import { ICharacter } from "../../types/interfaces";
-import { ICharacterListProps } from "../../types/interfaces";
+import { ICharacter, ICharacterListProps } from "../../types/interfaces";
 import Character from "../Character/Charachter";
 import Spinner from "../Spinner/Spinner";
 

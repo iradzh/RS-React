@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from "react";
+import { ChangeEvent, Component } from "react";
 
 import r2d2 from "../../assets/r2d2.png";
 import { ISearchBarProps, ISearchBarState } from "../../types/interfaces";
