@@ -1,9 +1,9 @@
-import './ErrorBoundary.scss';
+import "./ErrorBoundary.scss";
 
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component, ErrorInfo } from "react";
 
-import yoda from '../../assets/yoda.png';
-import { IErrBoundProps, IErrBoundState } from '../../types/interfaces';
+import yoda from "../../assets/yoda.png";
+import { IErrBoundProps, IErrBoundState } from "../../types/interfaces";
 
 class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
   constructor(props: IErrBoundProps) {
@@ -13,9 +13,9 @@ class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error(
-      'Hey, this is ErrorBoundary. I caught an error, look: ',
+      "Hey, this is ErrorBoundary. I caught an error, look: ",
       error,
-      errorInfo
+      errorInfo,
     );
     this.setState({ hasError: true });
   }
@@ -27,11 +27,11 @@ class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className='error_boundary'>
+        <div className="error_boundary">
           <h1>Error, we have, hmmm.</h1>
           <h1>Try once more, you should. Mmm, yes.</h1>
-          <img src={yoda} alt='yoda' className='error_img' />
-          <button onClick={this.resetError} className='error_boundary__reset'>
+          <img src={yoda} alt="yoda" className="error_img" />
+          <button onClick={this.resetError} className="error_boundary__reset">
             Reset
           </button>
         </div>

@@ -1,9 +1,9 @@
-import './ErrorTrigger.scss';
+import "./ErrorTrigger.scss";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Star from '../../assets/star.png';
-import { IErrorTriggerProps, IErrorTriggerState } from '../../types/interfaces';
+import Star from "../../assets/star.png";
+import { IErrorTriggerProps, IErrorTriggerState } from "../../types/interfaces";
 
 class ErrorTriggerButton extends Component<
   IErrorTriggerProps,
@@ -20,17 +20,19 @@ class ErrorTriggerButton extends Component<
 
   render() {
     if (this.state.error) {
-      throw new Error('Error demonstration');
+      throw new Error("Error demonstration");
     }
     return (
-      <div className='error_trigger'>
+      <div className="error_trigger">
         <img
-          alt='Death star'
+          alt="Death star"
           src={Star}
-          className='error_trigger__img'
+          className="error_trigger__img"
           onClick={this.handleClick}
         />
-        <p className='error_trigger__hint'>throw error</p>
+        <p className="error_trigger__hint" onClick={this.handleClick}>
+          throw error
+        </p>
       </div>
     );
   }

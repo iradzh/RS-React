@@ -1,13 +1,13 @@
-import './components/SearchBar/SearchBar.scss';
+import "./components/SearchBar/SearchBar.scss";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import CharachterService from './api/service';
-import CharacterList from './components/CharacterList/CharacterList';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import ErrorTriggerButton from './components/ErrorTrigger/ErrorTrigger';
-import SearchBar from './components/SearchBar/Searchbar';
-import { IAppState, ICharacter } from './types/interfaces';
+import CharachterService from "./api/service";
+import CharacterList from "./components/CharacterList/CharacterList";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import ErrorTriggerButton from "./components/ErrorTrigger/ErrorTrigger";
+import SearchBar from "./components/SearchBar/SearchBar";
+import { IAppState, ICharacter } from "./types/interfaces";
 
 class App extends Component<object, IAppState> {
   charService = new CharachterService();
@@ -15,7 +15,7 @@ class App extends Component<object, IAppState> {
   constructor(props: object) {
     super(props);
     this.state = {
-      searchChar: '',
+      searchChar: "",
       searchResults: [],
       loading: true,
       charList: [],
@@ -23,7 +23,15 @@ class App extends Component<object, IAppState> {
   }
 
   componentDidMount() {
-    this.onRequest();
+    const storedSearch = localStorage.getItem("search");
+
+    if (storedSearch) {
+      this.setState({ searchChar: storedSearch }, () => {
+        this.searchCharacters(storedSearch);
+      });
+    } else {
+      this.onRequest();
+    }
   }
 
   onRequest = () => {
@@ -35,12 +43,12 @@ class App extends Component<object, IAppState> {
   };
 
   searchCharacters = (searchChar: string) => {
-    if (searchChar.trim() === '') {
+    if (searchChar.trim() === "") {
       this.onRequest();
     } else {
       this.setState({ loading: true });
 
-      localStorage.setItem('search', searchChar);
+      localStorage.setItem("search", searchChar);
 
       this.charService
         .searchCharacter(searchChar)
@@ -64,9 +72,11 @@ class App extends Component<object, IAppState> {
     this.setState(
       {
         loading: true,
-        searchChar: '',
+        searchChar: "",
+        searchResults: [],
       },
-      () => this.onRequest()
+
+      () => this.onRequest(),
     );
   };
 

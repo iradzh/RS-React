@@ -14,24 +14,19 @@
 
 .error_trigger__hint {
   margin: 0;
-  display: none;
   position: absolute;
-  top: 13em;
-  left: 6em;
+  top: 14.3em;
+  left: 6.4em;
   color: #9fff82;
   border: 2px solid #9fff82;
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 1px 3px;
   font-size: 12px;
   transition: opacity 0.3s;
 
   &:hover {
     cursor: pointer;
   }
-}
-
-.error_trigger__img:hover + .error_trigger__hint {
-  display: block;
 }
 
 @keyframes shadowAnimation {
