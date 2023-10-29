@@ -4,8 +4,10 @@
   align-items: center;
   gap: 1em;
   height: 6.4em;
-  background-color: #90787d;
-
+  background-image: url(../../assets/bg.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   img {
     height: 4.8em;
   }
@@ -15,9 +17,8 @@
   height: 2.4em;
   padding: 0.2em 0.8em;
   font-size: 1.1em;
-  background-color: #fff;
   border-radius: 6px;
-  border: none;
+  border: 1px solid #9fff82;
   transition: all ease 0.2s;
 
   &:hover {
@@ -27,12 +28,14 @@
 }
 
 .clear__btn {
-  color: #fff;
-  background-color: #413942;
+  color: #000000;
+  background-color: #ffffff;
 }
 
-// .search__btn {
-// }
+.search__btn {
+  color: #000000;
+  background-color: #9fff82;
+}
 
 .searchbar__input {
   font-size: 1.1em;

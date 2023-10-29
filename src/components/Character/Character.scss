@@ -6,11 +6,10 @@
   width: 15em;
   border-radius: 12px;
   transition: all ease 0.3s;
-  color: black;
-  background-color: white;
+  color: #000000;
+  background-color: #fff;
   &:hover {
-    transform: scale(1.1);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.05);
   }
 }
 
@@ -19,8 +18,8 @@
   margin: 0;
   padding: 6px 0 6px 12px;
   border-radius: 12px 12px 0 0;
-  color: #3e3952;
-  background-color: #e9dce1;
+  color: #000000;
+  background-color: #9fff82;
   font-size: 1.4em;
   box-sizing: border-box;
 }
@@ -29,6 +28,6 @@
   margin: 0.6em;
   span {
     font-weight: 800;
-    color: #3e3952;
+    color: #000000;
   }
 }

@@ -44,3 +44,9 @@ export interface ISearchBarProps {
 export interface ISearchBarState {
   searchChar: string;
 }
+
+export interface IErrorTriggerProps {}
+
+export interface IErrorTriggerState {
+  error: boolean;
+}

@@ -38,6 +38,9 @@ class App extends Component<object, AppState> {
       this.onRequest();
     } else {
       this.setState({ loading: true });
+
+      localStorage.setItem('search', searchChar);
+
       this.charService
         .searchCharacter(searchChar)
         .then((searchResults: ICharacter[]) => {

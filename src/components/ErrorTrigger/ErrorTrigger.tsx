@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 
-interface ErrorTriggerButtonProps {}
-
-interface ErrorTriggerButtonState {
-  error: boolean;
-}
+import Star from '../../assets/star.png';
+import './ErrorTrigger.scss';
+import { IErrorTriggerProps, IErrorTriggerState } from '../../types/interfaces';
 
 class ErrorTriggerButton extends Component<
-  ErrorTriggerButtonProps,
-  ErrorTriggerButtonState
+  IErrorTriggerProps,
+  IErrorTriggerState
 > {
-  constructor(props: ErrorTriggerButtonProps) {
+  constructor(props: IErrorTriggerProps) {
     super(props);
     this.state = { error: false };
   }
@@ -25,7 +23,13 @@ class ErrorTriggerButton extends Component<
     }
     return (
       <div className='error_trigger'>
-        <button onClick={this.handleClick}>Throw Error</button>
+        <img
+          alt='Death star'
+          src={Star}
+          className='error_trigger__img'
+          onClick={this.handleClick}
+        />
+        <p className='error_trigger__hint'>throw error</p>
       </div>
     );
   }
