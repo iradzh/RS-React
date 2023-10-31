@@ -46,7 +46,3 @@ export interface ISearchBarState {
 }
 
 export interface IErrorTriggerProps {}
-
-export interface IErrorTriggerState {
-  error: boolean;
-}

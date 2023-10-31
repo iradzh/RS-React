@@ -1,11 +1,11 @@
-import './CharacterList.scss';
+import "./CharacterList.scss";
 
-import React from 'react';
+import React from "react";
 
-import gial from '../../assets/gial.png';
-import { ICharacter, ICharacterListProps } from '../../types/interfaces';
-import Character from '../Character/Charachter';
-import Spinner from '../Spinner/Spinner';
+import gial from "../../assets/gial.png";
+import { ICharacter, ICharacterListProps } from "../../types/interfaces";
+import Character from "../Character/Charachter";
+import Spinner from "../Spinner/Spinner";
 
 const CharacterList: React.FC<ICharacterListProps> = (props) => {
   const generateUniqueKey = () => {
@@ -14,12 +14,12 @@ const CharacterList: React.FC<ICharacterListProps> = (props) => {
     );
   };
 
-  function renderCharacters(characters: ICharacter[]) {
+  const renderCharacters = (characters: ICharacter[]) => {
     if (characters.length === 0) {
       return (
-        <div className='char_list__empty'>
+        <div className="char_list__empty">
           <p>No results found</p>
-          <img src={gial} alt='Gial' />
+          <img src={gial} alt="Gial" />
         </div>
       );
     }
@@ -27,8 +27,8 @@ const CharacterList: React.FC<ICharacterListProps> = (props) => {
     const items = characters.map((char: ICharacter) => {
       return <Character char={char} key={generateUniqueKey()} />;
     });
-    return <div className='char_list'>{items}</div>;
-  }
+    return <div className="char_list">{items}</div>;
+  };
 
   const { characters, loading } = props;
 
@@ -36,7 +36,7 @@ const CharacterList: React.FC<ICharacterListProps> = (props) => {
     return <Spinner />;
   }
 
-  return <div className='main'>{renderCharacters(characters)}</div>;
+  return <div className="main">{renderCharacters(characters)}</div>;
 };
 
 export default CharacterList;

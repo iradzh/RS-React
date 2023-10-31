@@ -1,58 +1,47 @@
-import { ChangeEvent, Component } from "react";
+import { ChangeEvent, useState } from "react";
 
 import r2d2 from "../../assets/r2d2.png";
 import { ISearchBarProps, ISearchBarState } from "../../types/interfaces";
 
-class SearchBar extends Component<ISearchBarProps, ISearchBarState> {
-  constructor(props: ISearchBarProps) {
-    super(props);
-    const storedSearch = localStorage.getItem("search");
-    this.state = {
-      searchChar: storedSearch || "",
-    };
-  }
+const SearchBar: React.FC<ISearchBarProps> = (props) => {
+  const storedSearch = localStorage.getItem("search");
+  const [state, setState] = useState<ISearchBarState>({
+    searchChar: storedSearch || "",
+  });
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchChar: event.target.value });
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setState({ searchChar: event.target.value });
   };
 
-  handleSearch = () => {
-    this.props.onSearch(this.state.searchChar);
+  const handleSearch = () => {
+    props.onSearch(state.searchChar);
   };
 
-  handleClear = () => {
+  const handleClear = () => {
     localStorage.clear();
-    this.setState({ searchChar: "" });
-    this.props.onClear();
+    setState({ searchChar: "" });
+    props.onClear();
   };
 
-  render() {
-    return (
-      <div className="searchbar">
-        <img alt="r2d2" src={r2d2} />
-        <input
-          type="text"
-          placeholder="Explore Star Wars characters"
-          className="searchbar__input"
-          value={this.state.searchChar}
-          onChange={this.handleInputChange}
-        />
+  return (
+    <div className="searchbar">
+      <img alt="r2d2" src={r2d2} />
+      <input
+        type="text"
+        placeholder="Explore Star Wars characters"
+        className="searchbar__input"
+        value={state.searchChar}
+        onChange={handleInputChange}
+      />
 
-        <button
-          className="searchbar__btn search__btn"
-          onClick={this.handleSearch}
-        >
-          Search
-        </button>
-        <button
-          className="searchbar__btn clear__btn"
-          onClick={this.handleClear}
-        >
-          Clear
-        </button>
-      </div>
-    );
-  }
-}
+      <button className="searchbar__btn search__btn" onClick={handleSearch}>
+        Search
+      </button>
+      <button className="searchbar__btn clear__btn" onClick={handleClear}>
+        Clear
+      </button>
+    </div>
+  );
+};
 
 export default SearchBar;

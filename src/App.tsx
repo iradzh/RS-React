@@ -1,6 +1,6 @@
 import "./components/SearchBar/SearchBar.scss";
 
-import { Component } from "react";
+import { useEffect, useState } from "react";
 
 import CharachterService from "./api/service";
 import CharacterList from "./components/CharacterList/CharacterList";
@@ -9,95 +9,104 @@ import ErrorTriggerButton from "./components/ErrorTrigger/ErrorTrigger";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { IAppState, ICharacter } from "./types/interfaces";
 
-class App extends Component<object, IAppState> {
-  charService = new CharachterService();
+const App = () => {
+  const charService = new CharachterService();
+  const [state, setState] = useState<IAppState>({
+    searchChar: "",
+    searchResults: [],
+    loading: true,
+    charList: [],
+  });
 
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      searchChar: "",
-      searchResults: [],
-      loading: true,
-      charList: [],
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const storedSearch = localStorage.getItem("search");
 
     if (storedSearch) {
-      this.setState({ searchChar: storedSearch }, () => {
-        this.searchCharacters(storedSearch);
-      });
+      setState((prevState) => ({
+        ...prevState,
+        searchChar: storedSearch,
+      }));
+      searchCharacters(storedSearch);
     } else {
-      this.onRequest();
+      onRequest();
     }
-  }
+  }, []);
 
-  onRequest = () => {
-    this.charService.getAllCharacters().then(this.onCharListLoaded);
+  const onRequest = () => {
+    charService.getAllCharacters().then(onCharListLoaded);
   };
 
-  onCharListLoaded = (newCharList: ICharacter[]) => {
-    this.setState({ charList: newCharList, loading: false });
+  const onCharListLoaded = (newCharList: ICharacter[]) => {
+    setState((prevState) => ({
+      ...prevState,
+      charList: newCharList,
+      loading: false,
+    }));
   };
 
-  searchCharacters = (searchChar: string) => {
+  const searchCharacters = (searchChar: string) => {
     if (searchChar.trim() === "") {
-      this.onRequest();
+      onRequest();
     } else {
-      this.setState({ loading: true });
+      setState((prevState) => ({
+        ...prevState,
+        loading: true,
+      }));
 
       localStorage.setItem("search", searchChar);
 
-      this.charService
+      charService
         .searchCharacter(searchChar)
         .then((searchResults: ICharacter[]) => {
-          this.setState({ searchResults, loading: false });
-
-          if (searchResults.length > 0) {
-            this.setState({ charList: searchResults });
-          } else {
-            this.setState({ charList: [] });
-          }
+          setState((prevState) => ({
+            ...prevState,
+            searchResults,
+            loading: false,
+            charList: searchResults.length > 0 ? searchResults : [],
+          }));
         })
         .catch((error) => {
           console.error(error);
-          this.setState({ searchResults: [], loading: false });
+          setState((prevState) => ({
+            ...prevState,
+            searchResults: [],
+            loading: false,
+          }));
         });
     }
   };
 
-  clearSearch = () => {
-    this.setState(
-      {
-        loading: true,
-        searchChar: "",
-        searchResults: [],
-      },
-
-      () => this.onRequest(),
-    );
+  const clearSearch = () => {
+    setState((prevState) => ({
+      ...prevState,
+      loading: true,
+      searchChar: "",
+      searchResults: [],
+    }));
+    onRequest();
   };
 
-  render() {
-    const { searchResults, charList, loading } = this.state;
-    const charactersToDisplay =
-      searchResults.length > 0 ? searchResults : charList;
+  const { searchResults, charList, loading } = state;
+  const charactersToDisplay =
+    searchResults.length > 0 ? searchResults : charList;
 
-    return (
-      <ErrorBoundary>
-        <SearchBar
-          searchChar={this.state.searchChar}
-          onSearch={this.searchCharacters}
-          onClear={this.clearSearch}
-          onInputChange={(e) => this.setState({ searchChar: e.target.value })}
-        />
-        <ErrorTriggerButton />
-        <CharacterList characters={charactersToDisplay} loading={loading} />
-      </ErrorBoundary>
-    );
-  }
-}
+  return (
+    <ErrorBoundary>
+      <SearchBar
+        searchChar={state.searchChar}
+        onSearch={searchCharacters}
+        onClear={clearSearch}
+        onInputChange={(e) =>
+          setState((prevState) => ({
+            ...prevState,
+            searchChar: e.target.value,
+          }))
+        }
+      />
+      <ErrorTriggerButton />
+      <CharacterList characters={charactersToDisplay} loading={loading} />
+    </ErrorBoundary>
+  );
+};
 
 export default App;
