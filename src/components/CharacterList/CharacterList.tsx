@@ -1,44 +1,42 @@
-import "./CharacterList.scss";
+import './CharacterList.scss';
 
-import { Component } from "react";
+import React from 'react';
 
-import gial from "../../assets/gial.png";
-import { ICharacter, ICharacterListProps } from "../../types/interfaces";
-import Character from "../Character/Charachter";
-import Spinner from "../Spinner/Spinner";
+import gial from '../../assets/gial.png';
+import { ICharacter, ICharacterListProps } from '../../types/interfaces';
+import Character from '../Character/Charachter';
+import Spinner from '../Spinner/Spinner';
 
-class CharacterList extends Component<ICharacterListProps> {
-  generateUniqueKey = () => {
+const CharacterList: React.FC<ICharacterListProps> = (props) => {
+  const generateUniqueKey = () => {
     return (
       Math.floor(Math.random() * 1000) + Math.floor(Math.random() * 1000) + 1
     );
   };
 
-  renderCharacters(characters: ICharacter[]) {
+  function renderCharacters(characters: ICharacter[]) {
     if (characters.length === 0) {
       return (
-        <div className="char_list__empty">
+        <div className='char_list__empty'>
           <p>No results found</p>
-          <img src={gial} alt="Gial" />
+          <img src={gial} alt='Gial' />
         </div>
       );
     }
 
     const items = characters.map((char: ICharacter) => {
-      return <Character char={char} key={this.generateUniqueKey()} />;
+      return <Character char={char} key={generateUniqueKey()} />;
     });
-    return <div className="char_list">{items}</div>;
+    return <div className='char_list'>{items}</div>;
   }
 
-  render() {
-    const { characters, loading } = this.props;
+  const { characters, loading } = props;
 
-    if (loading) {
-      return <Spinner />;
-    }
-
-    return <div className="main">{this.renderCharacters(characters)}</div>;
+  if (loading) {
+    return <Spinner />;
   }
-}
+
+  return <div className='main'>{renderCharacters(characters)}</div>;
+};
 
 export default CharacterList;
