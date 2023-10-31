@@ -1,0 +1,59 @@
+.error_boundary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.error_img {
+  width: 14em;
+  margin: 0 auto;
+}
+
+.error_boundary__reset {
+  width: 5em;
+  margin: 1em auto;
+  font-size: 1.2em;
+  font-weight: 800;
+  background-color: #000;
+  border-radius: 8px;
+  color: #9fff82;
+  border: 2px solid #9fff82;
+  padding: 0.3em 0;
+  transition: all ease 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+.error_trigger {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  button {
+    height: 2em;
+    width: 8em;
+    font-size: 1em;
+    font-weight: 800;
+    border-radius: 8px;
+    border: 2px solid #ff8b8b;
+    color: #ff8b8b;
+    background-color: #000;
+    transition: all ease 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
+}

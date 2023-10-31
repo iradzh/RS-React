@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 6.4em);
+}
+
+.char_list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  gap: 1.4em;
+  margin: 8% 0;
+}
+
+.char_list__empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  p {
+    font-size: 1.8em;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+  }
+  img {
+    width: 7em;
+    border-radius: 35%;
+    margin: 1em auto;
+  }
+}

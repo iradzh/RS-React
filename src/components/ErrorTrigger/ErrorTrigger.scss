@@ -1,0 +1,42 @@
+.error_trigger__img {
+  width: 6em;
+  position: absolute;
+  top: 8em;
+  left: 4em;
+  border-radius: 50%;
+  animation: shadowAnimation 2s infinite;
+  transition: all ease 0.5s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.error_trigger__hint {
+  margin: 0;
+  position: absolute;
+  top: 14.3em;
+  left: 6.4em;
+  color: #9fff82;
+  border: 2px solid #9fff82;
+  border-radius: 4px;
+  padding: 1px 3px;
+  font-size: 12px;
+  transition: opacity 0.3s;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@keyframes shadowAnimation {
+  0% {
+    box-shadow: 0 0 10px #9fff82;
+  }
+  50% {
+    box-shadow: 0 0 20px #9fff82;
+  }
+  100% {
+    box-shadow: 0 0 10px #9fff82;
+  }
+}
