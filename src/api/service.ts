@@ -1,5 +1,5 @@
 class CharachterService {
-  apiUrl = 'https://rickandmortyapi.com/api/character';
+  apiUrl = 'https://swapi.dev/api/people/?page=';
 
   callApi = async (url: string) => {
     const response = await fetch(url);
@@ -21,3 +21,14 @@ class CharachterService {
 }
 
 export default CharachterService;
+
+const baseUrl = 'https://swapi.dev/api/people/?page=';
+
+export async function getAll() {
+  const response = await fetch(baseUrl);
+  if (!response.ok) {
+    throw new Error(`Sorry, try later`);
+  }
+  const data = await response.json();
+  return data.results;
+}

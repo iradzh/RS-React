@@ -9,10 +9,13 @@ const Character: React.FC<{ char: ICharacter }> = ({ char }) => {
     <div className='char'>
       <h1 className='char__name'>{char.name}</h1>
       <p className='char__text'>
-        Status: <span>{char.status}</span>
+        Birth year: <span>{char.birth_year}</span>
       </p>
       <p className='char__text'>
-        Species: <span>{char.species}</span>
+        Eye color: <span>{char.eye_color}</span>
+      </p>
+      <p className='char__text'>
+        Skin color: <span>{char.skin_color}</span>
       </p>
       <p className='char__text'>
         Gender: <span>{char.gender}</span>

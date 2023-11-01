@@ -1,24 +1,27 @@
-import "./components/SearchBar/SearchBar.scss";
+import './components/SearchBar/SearchBar.scss';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import CharachterService from "./api/service";
-import CharacterList from "./components/CharacterList/CharacterList";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
-import SearchBar from "./components/SearchBar/SearchBar";
-import { IAppState, ICharacter } from "./types/interfaces";
+import CharachterService from './api/service';
+import CharacterList from './components/CharacterList/CharacterList';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import SearchBar from './components/SearchBar/SearchBar';
+import Settings from './components/Settings/Settings';
+import { IAppState, ICharacter } from './types/interfaces';
 
 const App = () => {
   const charService = new CharachterService();
   const [state, setState] = useState<IAppState>({
-    searchChar: "",
+    searchChar: '',
     searchResults: [],
     loading: true,
     charList: [],
+    charPerPage: 10,
+    currentPage: 1,
   });
 
   useEffect(() => {
-    const storedSearch = localStorage.getItem("search");
+    const storedSearch = localStorage.getItem('search');
 
     if (storedSearch) {
       setState((prevState) => ({
@@ -44,7 +47,7 @@ const App = () => {
   };
 
   const searchCharacters = (searchChar: string) => {
-    if (searchChar.trim() === "") {
+    if (searchChar.trim() === '') {
       onRequest();
     } else {
       setState((prevState) => ({
@@ -52,7 +55,7 @@ const App = () => {
         loading: true,
       }));
 
-      localStorage.setItem("search", searchChar);
+      localStorage.setItem('search', searchChar);
 
       charService
         .searchCharacter(searchChar)
@@ -79,7 +82,7 @@ const App = () => {
     setState((prevState) => ({
       ...prevState,
       loading: true,
-      searchChar: "",
+      searchChar: '',
       searchResults: [],
     }));
     onRequest();
@@ -102,6 +105,7 @@ const App = () => {
           }))
         }
       />
+      <Settings />
       <CharacterList characters={charactersToDisplay} loading={loading} />
     </ErrorBoundary>
   );

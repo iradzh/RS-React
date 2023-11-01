@@ -29,7 +29,7 @@ const SearchBar: React.FC<ISearchBarProps> = (props) => {
 
       <input
         type='text'
-        placeholder='Explore Rick and Morty characters'
+        placeholder='Explore Star Wars characters'
         className='searchbar__input'
         value={state.searchChar}
         onChange={handleInputChange}

@@ -18,7 +18,7 @@ const ErrorTriggerButton: React.FC<IErrorTriggerProps> = () => {
   return (
     <div className='error_trigger'>
       <button
-        className='searchbar__btn error_trigger__btn'
+        className='searchbar__btn error_trigger__hint'
         onClick={handleClick}
       >
         throw error

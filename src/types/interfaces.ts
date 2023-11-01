@@ -1,12 +1,21 @@
 import { ChangeEvent } from 'react';
 
+export interface IAppState {
+  searchChar: string;
+  searchResults: ICharacter[];
+  loading: boolean;
+  charList: ICharacter[];
+  charPerPage: number;
+  currentPage: 1;
+}
+
 export interface ICharacter {
   id: number;
   name: string;
-  status: string;
-  species: string;
+  birth_year: string;
+  eye_color: string;
+  skin_color: string;
   gender: string;
-  picUrl: string;
 }
 
 export interface ICharacterProps {
@@ -17,13 +26,6 @@ export interface ICharacterProps {
 export interface ICharacterListProps {
   characters: ICharacter[];
   loading: boolean;
-}
-
-export interface IAppState {
-  searchChar: string;
-  searchResults: ICharacter[];
-  loading: boolean;
-  charList: ICharacter[];
 }
 
 export interface IErrBoundProps {
