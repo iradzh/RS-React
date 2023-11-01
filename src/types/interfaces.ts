@@ -1,12 +1,12 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 export interface ICharacter {
   id: number;
   name: string;
-  birth_year: string;
-  eye_color: string;
-  skin_color: string;
+  status: string;
+  species: string;
   gender: string;
+  picUrl: string;
 }
 
 export interface ICharacterProps {

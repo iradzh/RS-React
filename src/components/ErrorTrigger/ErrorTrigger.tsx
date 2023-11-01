@@ -1,9 +1,8 @@
-import "./ErrorTrigger.scss";
+import './ErrorTrigger.scss';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import Star from "../../assets/star.png";
-import { IErrorTriggerProps } from "../../types/interfaces";
+import { IErrorTriggerProps } from '../../types/interfaces';
 
 const ErrorTriggerButton: React.FC<IErrorTriggerProps> = () => {
   const [errorState, setErrorState] = useState(false);
@@ -13,20 +12,17 @@ const ErrorTriggerButton: React.FC<IErrorTriggerProps> = () => {
   };
 
   if (errorState) {
-    throw new Error("Error demonstration");
+    throw new Error('Error demonstration');
   }
 
   return (
-    <div className="error_trigger">
-      <img
-        alt="Death star"
-        src={Star}
-        className="error_trigger__img"
+    <div className='error_trigger'>
+      <button
+        className='searchbar__btn error_trigger__btn'
         onClick={handleClick}
-      />
-      <p className="error_trigger__hint" onClick={handleClick}>
+      >
         throw error
-      </p>
+      </button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 class CharachterService {
-  apiUrl = "https://swapi.dev/api/people/";
+  apiUrl = 'https://rickandmortyapi.com/api/character';
 
   callApi = async (url: string) => {
     const response = await fetch(url);
@@ -10,7 +10,7 @@ class CharachterService {
   };
 
   searchCharacter = async (searchChar: string) => {
-    const response = await this.callApi(`${this.apiUrl}?search=${searchChar}`);
+    const response = await this.callApi(`${this.apiUrl}?name=${searchChar}`);
     return response.results;
   };
 

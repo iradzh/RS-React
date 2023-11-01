@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import CharachterService from "./api/service";
 import CharacterList from "./components/CharacterList/CharacterList";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
-import ErrorTriggerButton from "./components/ErrorTrigger/ErrorTrigger";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { IAppState, ICharacter } from "./types/interfaces";
 
@@ -103,7 +102,6 @@ const App = () => {
           }))
         }
       />
-      <ErrorTriggerButton />
       <CharacterList characters={charactersToDisplay} loading={loading} />
     </ErrorBoundary>
   );

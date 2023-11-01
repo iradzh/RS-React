@@ -1,12 +1,12 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react';
 
-import r2d2 from "../../assets/r2d2.png";
-import { ISearchBarProps, ISearchBarState } from "../../types/interfaces";
+import { ISearchBarProps, ISearchBarState } from '../../types/interfaces';
+import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
 const SearchBar: React.FC<ISearchBarProps> = (props) => {
-  const storedSearch = localStorage.getItem("search");
+  const storedSearch = localStorage.getItem('search');
   const [state, setState] = useState<ISearchBarState>({
-    searchChar: storedSearch || "",
+    searchChar: storedSearch || '',
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,25 +19,26 @@ const SearchBar: React.FC<ISearchBarProps> = (props) => {
 
   const handleClear = () => {
     localStorage.clear();
-    setState({ searchChar: "" });
+    setState({ searchChar: '' });
     props.onClear();
   };
 
   return (
-    <div className="searchbar">
-      <img alt="r2d2" src={r2d2} />
+    <div className='searchbar'>
+      <ErrorTriggerButton />
+
       <input
-        type="text"
-        placeholder="Explore Star Wars characters"
-        className="searchbar__input"
+        type='text'
+        placeholder='Explore Rick and Morty characters'
+        className='searchbar__input'
         value={state.searchChar}
         onChange={handleInputChange}
       />
 
-      <button className="searchbar__btn search__btn" onClick={handleSearch}>
+      <button className='searchbar__btn search__btn' onClick={handleSearch}>
         Search
       </button>
-      <button className="searchbar__btn clear__btn" onClick={handleClear}>
+      <button className='searchbar__btn clear__btn' onClick={handleClear}>
         Clear
       </button>
     </div>
