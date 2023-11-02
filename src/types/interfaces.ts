@@ -53,5 +53,5 @@ export interface IValue {
   response: ICharacter[];
   isLoading: boolean;
   error: string;
-  fetchData: (url: string) => void;
+  fetchData: (url: string, perPage: number) => void;
 }

@@ -1,22 +1,38 @@
 import './Setting.scss';
 
-import React from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useContext } from 'react';
+
+import { CharacterContext } from '../../pages/Home/Home';
 
 const Settings: React.FC = () => {
+  const [perPage, setPerPage] = useState(5);
+  const { fetchData } = useContext(CharacterContext);
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = parseInt(e.target.value, 10);
+    setPerPage(selectedValue);
+    fetchData('', selectedValue);
+  };
+
   return (
     <div className='settings'>
-      <h1>Settings</h1>
-      <form>
-        <label htmlFor='perPage'>Items per page</label>
-        <input
-          type='number'
-          id='perPage'
-          name='perPage'
-          min={1}
-          max={10}
-          className='settings_perPage_input'
-        />
-      </form>
+      <select
+        value={perPage.toString()}
+        onChange={handleSelectChange}
+        className='settings__select'
+      >
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+      </select>
     </div>
   );
 };

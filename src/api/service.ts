@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 
 import { ICharacter } from '../types/interfaces';
 
-export const loadData = (param: string) => {
-  const [response, setRespones] = useState<ICharacter[]>([]);
+export const loadData = (param: string, perPage: number) => {
+  const [response, setResponse] = useState<ICharacter[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   axios.defaults.baseURL = 'https://swapi.dev/api/people';
 
-  const fetchData = async (url: string) => {
+  const fetchData = async (url: string, perPage: number) => {
     try {
       setIsLoading(true);
       const res = await axios(url);
-      setRespones(res.data.results);
+      setResponse(res.data.results.slice(0, perPage));
       setIsLoading(false);
     } catch (err) {
       setError(err as string);
@@ -22,13 +22,13 @@ export const loadData = (param: string) => {
   };
 
   useEffect(() => {
-    fetchData(param);
-  }, [param]);
+    fetchData(param, perPage);
+  }, [param, perPage]);
 
   return {
     response,
     isLoading,
     error,
-    fetchData: (url: string) => fetchData(url),
+    fetchData: (url: string, perPage: number) => fetchData(url, perPage),
   };
 };
