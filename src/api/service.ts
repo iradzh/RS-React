@@ -1,34 +1,34 @@
-class CharachterService {
-  apiUrl = 'https://swapi.dev/api/people/?page=';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-  callApi = async (url: string) => {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Sorry, try later`);
+import { ICharacter } from '../types/interfaces';
+
+export const loadData = (param: string) => {
+  const [response, setRespones] = useState<ICharacter[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  axios.defaults.baseURL = 'https://swapi.dev/api/people';
+
+  const fetchData = async (url: string) => {
+    try {
+      setIsLoading(true);
+      const res = await axios(url);
+      setRespones(res.data.results);
+      setIsLoading(false);
+    } catch (err) {
+      setError(err as string);
     }
-    return await response.json();
   };
 
-  searchCharacter = async (searchChar: string) => {
-    const response = await this.callApi(`${this.apiUrl}?name=${searchChar}`);
-    return response.results;
+  useEffect(() => {
+    fetchData(param);
+  }, [param]);
+
+  return {
+    response,
+    isLoading,
+    error,
+    fetchData: (url: string) => fetchData(url),
   };
-
-  getAllCharacters = async () => {
-    const response = await this.callApi(`${this.apiUrl}`);
-    return response.results;
-  };
-}
-
-export default CharachterService;
-
-const baseUrl = 'https://swapi.dev/api/people/?page=';
-
-export async function getAll() {
-  const response = await fetch(baseUrl);
-  if (!response.ok) {
-    throw new Error(`Sorry, try later`);
-  }
-  const data = await response.json();
-  return data.results;
-}
+};

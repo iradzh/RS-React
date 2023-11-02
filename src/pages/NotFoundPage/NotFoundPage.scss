@@ -1,0 +1,23 @@
+.not_found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 0;
+  }
+  p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  a {
+    color: #9fff82;
+    text-decoration: none;
+    font-weight: 800;
+  }
+}

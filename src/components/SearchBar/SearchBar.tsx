@@ -1,26 +1,24 @@
-import { ChangeEvent, useState } from 'react';
+import { useContext, useState } from 'react';
 
-import { ISearchBarProps, ISearchBarState } from '../../types/interfaces';
+import { CharacterContext } from '../../pages/Home/Home';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
-const SearchBar: React.FC<ISearchBarProps> = (props) => {
-  const storedSearch = localStorage.getItem('search');
-  const [state, setState] = useState<ISearchBarState>({
-    searchChar: storedSearch || '',
-  });
+const SearchBar: React.FC = () => {
+  // const storedSearch = localStorage.getItem('search');
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setState({ searchChar: event.target.value });
-  };
+  const [searchChar, setSearchChar] = useState('');
+
+  const { fetchData } = useContext(CharacterContext);
 
   const handleSearch = () => {
-    props.onSearch(state.searchChar);
+    if (searchChar) {
+      fetchData(`/?search=${searchChar}`);
+    }
   };
 
-  const handleClear = () => {
-    localStorage.clear();
-    setState({ searchChar: '' });
-    props.onClear();
+  const clearSearch = () => {
+    fetchData('');
+    setSearchChar('');
   };
 
   return (
@@ -31,14 +29,14 @@ const SearchBar: React.FC<ISearchBarProps> = (props) => {
         type='text'
         placeholder='Explore Star Wars characters'
         className='searchbar__input'
-        value={state.searchChar}
-        onChange={handleInputChange}
+        onChange={(e) => setSearchChar(e.target.value)}
+        value={searchChar}
       />
 
       <button className='searchbar__btn search__btn' onClick={handleSearch}>
         Search
       </button>
-      <button className='searchbar__btn clear__btn' onClick={handleClear}>
+      <button className='searchbar__btn clear__btn' onClick={clearSearch}>
         Clear
       </button>
     </div>

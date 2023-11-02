@@ -1,113 +1,16 @@
 import './components/SearchBar/SearchBar.scss';
 
-import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import CharachterService from './api/service';
-import CharacterList from './components/CharacterList/CharacterList';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import SearchBar from './components/SearchBar/SearchBar';
-import Settings from './components/Settings/Settings';
-import { IAppState, ICharacter } from './types/interfaces';
+import { Home } from './pages/Home/Home';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
-  const charService = new CharachterService();
-  const [state, setState] = useState<IAppState>({
-    searchChar: '',
-    searchResults: [],
-    loading: true,
-    charList: [],
-    charPerPage: 10,
-    currentPage: 1,
-  });
-
-  useEffect(() => {
-    const storedSearch = localStorage.getItem('search');
-
-    if (storedSearch) {
-      setState((prevState) => ({
-        ...prevState,
-        searchChar: storedSearch,
-      }));
-      searchCharacters(storedSearch);
-    } else {
-      onRequest();
-    }
-  }, []);
-
-  const onRequest = () => {
-    charService.getAllCharacters().then(onCharListLoaded);
-  };
-
-  const onCharListLoaded = (newCharList: ICharacter[]) => {
-    setState((prevState) => ({
-      ...prevState,
-      charList: newCharList,
-      loading: false,
-    }));
-  };
-
-  const searchCharacters = (searchChar: string) => {
-    if (searchChar.trim() === '') {
-      onRequest();
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        loading: true,
-      }));
-
-      localStorage.setItem('search', searchChar);
-
-      charService
-        .searchCharacter(searchChar)
-        .then((searchResults: ICharacter[]) => {
-          setState((prevState) => ({
-            ...prevState,
-            searchResults,
-            loading: false,
-            charList: searchResults.length > 0 ? searchResults : [],
-          }));
-        })
-        .catch((error) => {
-          console.error(error);
-          setState((prevState) => ({
-            ...prevState,
-            searchResults: [],
-            loading: false,
-          }));
-        });
-    }
-  };
-
-  const clearSearch = () => {
-    setState((prevState) => ({
-      ...prevState,
-      loading: true,
-      searchChar: '',
-      searchResults: [],
-    }));
-    onRequest();
-  };
-
-  const { searchResults, charList, loading } = state;
-  const charactersToDisplay =
-    searchResults.length > 0 ? searchResults : charList;
-
   return (
-    <ErrorBoundary>
-      <SearchBar
-        searchChar={state.searchChar}
-        onSearch={searchCharacters}
-        onClear={clearSearch}
-        onInputChange={(e) =>
-          setState((prevState) => ({
-            ...prevState,
-            searchChar: e.target.value,
-          }))
-        }
-      />
-      <Settings />
-      <CharacterList characters={charactersToDisplay} loading={loading} />
-    </ErrorBoundary>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='*' element={<NotFoundPage />} />
+    </Routes>
   );
 };
 

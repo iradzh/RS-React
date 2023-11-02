@@ -2,7 +2,7 @@ import './ErrorBoundary.scss';
 
 import { Component, ErrorInfo } from 'react';
 
-import RickError from '../../assets/rick_suprised.png';
+import Yoda from '../../assets/yoda.png';
 import { IErrBoundProps, IErrBoundState } from '../../types/interfaces';
 
 class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
@@ -29,10 +29,11 @@ class ErrorBoundary extends Component<IErrBoundProps, IErrBoundState> {
       return (
         <div className='error_boundary'>
           <h1>
-            Whoa, it seems like we stumbled into an error dimension here.
-            <br />I will, uh, do some sciencey stuff to fix it, okay?
+            Error, we have, hmmm.
+            <br />
+            Try once more, you should. Mmm, yes.
           </h1>
-          <img src={RickError} alt='Rick' className='error_img' />
+          <img src={Yoda} alt={Yoda} className='error_img' />
           <button onClick={this.resetError} className='error_boundary__reset'>
             Reset
           </button>

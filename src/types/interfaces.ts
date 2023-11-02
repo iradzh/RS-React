@@ -48,3 +48,10 @@ export interface ISearchBarState {
 }
 
 export interface IErrorTriggerProps {}
+
+export interface IValue {
+  response: ICharacter[];
+  isLoading: boolean;
+  error: string;
+  fetchData: (url: string) => void;
+}
