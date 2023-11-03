@@ -12,12 +12,6 @@ const Character: React.FC<{ char: ICharacter }> = ({ char }) => {
         Birth year: <span>{char.birth_year}</span>
       </p>
       <p className='char__text'>
-        Eye color: <span>{char.eye_color}</span>
-      </p>
-      <p className='char__text'>
-        Skin color: <span>{char.skin_color}</span>
-      </p>
-      <p className='char__text'>
         Gender: <span>{char.gender}</span>
       </p>
     </div>

@@ -16,6 +16,9 @@ export interface ICharacter {
   eye_color?: string;
   skin_color?: string;
   gender?: string;
+  height?: string;
+  mass?: string;
+  hair_color?: string;
   url?: string;
 }
 

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { loadData } from '../../api/service';
+import { loadList } from '../../api/service';
 import CharacterList from '../../components/CharacterList/CharacterList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Settings from '../../components/Settings/Settings';
@@ -11,7 +11,7 @@ export const CharacterContext = createContext(defaultContext);
 export const Home = () => {
   const storedSearch = localStorage.getItem('search');
   const searchUrl = storedSearch ? `/?search=${storedSearch}` : '';
-  const { response, isLoading, error, fetchData } = loadData(searchUrl);
+  const { response, isLoading, error, fetchData } = loadList(searchUrl);
 
   const value: IValue = {
     response,
