@@ -10,12 +10,13 @@ export interface IAppState {
 }
 
 export interface ICharacter {
-  id: number;
-  name: string;
-  birth_year: string;
-  eye_color: string;
-  skin_color: string;
-  gender: string;
+  id?: number;
+  name?: string;
+  birth_year?: string;
+  eye_color?: string;
+  skin_color?: string;
+  gender?: string;
+  url?: string;
 }
 
 export interface ICharacterProps {
@@ -61,4 +62,10 @@ export interface IApiResponse {
   next: string | null;
   previous: string | null;
   results: ICharacter[];
+}
+
+export interface ICharacterListProps {
+  onItemClick: (name: string) => void;
+  characters: ICharacter[];
+  loading: boolean;
 }

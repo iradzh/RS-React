@@ -4,6 +4,8 @@ import { CharacterContext } from '../../pages/Home/Home';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
 const SearchBar: React.FC = () => {
+  const storedSearch = localStorage.getItem('search');
+
   const [searchChar, setSearchChar] = useState('');
 
   const { fetchData } = useContext(CharacterContext);
@@ -31,7 +33,7 @@ const SearchBar: React.FC = () => {
         placeholder='Explore Star Wars characters'
         className='searchbar__input'
         onChange={(e) => setSearchChar(e.target.value)}
-        value={searchChar}
+        value={storedSearch || searchChar}
       />
 
       <button className='searchbar__btn search__btn' onClick={handleSearch}>
