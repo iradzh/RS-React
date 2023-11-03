@@ -4,21 +4,22 @@ import { CharacterContext } from '../../pages/Home/Home';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
 const SearchBar: React.FC = () => {
-  // const storedSearch = localStorage.getItem('search');
-
   const [searchChar, setSearchChar] = useState('');
 
   const { fetchData } = useContext(CharacterContext);
 
   const handleSearch = () => {
     if (searchChar) {
+      localStorage.setItem('search', searchChar);
       fetchData(`/?search=${searchChar}`);
     }
   };
 
   const clearSearch = () => {
-    fetchData('');
+    localStorage.clear();
+
     setSearchChar('');
+    fetchData('');
   };
 
   return (

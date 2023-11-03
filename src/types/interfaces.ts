@@ -50,8 +50,15 @@ export interface ISearchBarState {
 export interface IErrorTriggerProps {}
 
 export interface IValue {
-  response: ICharacter[];
+  response: IApiResponse;
   isLoading: boolean;
   error: string;
-  fetchData: (url: string, perPage: number) => void;
+  fetchData: (url: string) => void;
+}
+
+export interface IApiResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: ICharacter[];
 }

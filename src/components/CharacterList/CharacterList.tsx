@@ -14,14 +14,14 @@ const CharacterList: React.FC = () => {
     return <Spinner />;
   }
 
-  if (!response) {
+  if (!response.results) {
     return <div>No data available.</div>;
   }
 
   return (
     <div className='main'>
       <div className='char_list'>
-        {response.map((data: ICharacter, key: number) => (
+        {response.results.map((data: ICharacter, key: number) => (
           <Character key={key} char={data} />
         ))}
       </div>

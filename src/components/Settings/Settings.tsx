@@ -1,38 +1,36 @@
-import './Setting.scss';
+import './Settings.scss';
 
-import { ChangeEvent, useState } from 'react';
 import { useContext } from 'react';
 
 import { CharacterContext } from '../../pages/Home/Home';
 
 const Settings: React.FC = () => {
-  const [perPage, setPerPage] = useState(5);
-  const { fetchData } = useContext(CharacterContext);
+  const { response, isLoading, fetchData } = useContext(CharacterContext);
 
-  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = parseInt(e.target.value, 10);
-    setPerPage(selectedValue);
-    fetchData('', selectedValue);
+  const handleNextPage = () => {
+    if (response.next) {
+      fetchData(response.next);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (response.previous) {
+      fetchData(response.previous);
+    }
   };
 
   return (
     <div className='settings'>
-      <select
-        value={perPage.toString()}
-        onChange={handleSelectChange}
-        className='settings__select'
-      >
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option value='5'>5</option>
-        <option value='6'>6</option>
-        <option value='7'>7</option>
-        <option value='8'>8</option>
-        <option value='9'>9</option>
-        <option value='10'>10</option>
-      </select>
+      {!isLoading && (
+        <div className='pagination'>
+          <button onClick={handlePrevPage} disabled={!response.previous}>
+            &lt;
+          </button>
+          <button onClick={handleNextPage} disabled={!response.next}>
+            &gt;
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -9,7 +9,9 @@ import { defaultContext } from '../../util/constants';
 export const CharacterContext = createContext(defaultContext);
 
 export const Home = () => {
-  const { response, isLoading, error, fetchData } = loadData('', 5);
+  const storedSearch = localStorage.getItem('search');
+  const searchUrl = storedSearch ? `/?search=${storedSearch}` : '';
+  const { response, isLoading, error, fetchData } = loadData(searchUrl);
 
   const value: IValue = {
     response,
