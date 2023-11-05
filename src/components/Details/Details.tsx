@@ -1,11 +1,21 @@
 import './Details.scss';
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 import { ICharacter } from '../../types/interfaces';
 
 const Details: React.FC = () => {
   const char = useLoaderData() as ICharacter;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const closeDetails = () => {
+    if (location.search.indexOf('detailId') > 0) {
+      const url = location.search.slice(0, location.search.lastIndexOf('&'));
+      navigate(url);
+    }
+  };
 
   if (char) {
     return (
@@ -34,6 +44,7 @@ const Details: React.FC = () => {
         <p>
           Skin color:<span>{char.skin_color}</span>
         </p>
+        <button onClick={closeDetails}>Close</button>
       </div>
     );
   }

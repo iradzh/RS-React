@@ -21,8 +21,6 @@ export const Page = () => {
   const location = useLocation();
 
   const handleCloseDetails = () => {
-    console.log(location);
-
     if (location.search.indexOf('detailId') > 0) {
       const url = location.search.slice(0, location.search.lastIndexOf('&'));
       navigate(url);

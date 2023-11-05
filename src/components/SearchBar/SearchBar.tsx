@@ -39,7 +39,7 @@ const SearchBar: React.FC<ICharacterListProps> = (
           Search
         </button>
       </Link>
-      <Link to='/'>
+      <Link to={`/?perPage=${props.loadedData.perPage}`}>
         <button className='searchbar__btn clear__btn' onClick={clearSearch}>
           Clear
         </button>

@@ -36,8 +36,9 @@
   justify-content: space-between;
   align-items: center;
   width: 75%;
-  margin: 1em auto;
-  a {
+  margin: 1.8em auto;
+  a,
+  .pagination__current {
     margin: 0;
     padding: 0;
     display: flex;
@@ -58,7 +59,8 @@
   pointer-events: none;
 }
 
-.pagination__active {
+.pagination__active,
+.pagination__current {
   color: #9fff82;
   border: 1px solid #9fff82;
 }
