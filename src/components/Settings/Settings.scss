@@ -60,7 +60,10 @@
   }
   button:disabled {
     cursor: auto;
-    color: #9fff82;
-    background-color: #9fff823a;
+    color: #9fff8260;
+    border: 1px solid #9fff8237;
+    &:hover {
+      background-color: black;
+    }
   }
 }

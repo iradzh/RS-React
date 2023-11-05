@@ -1,47 +1,41 @@
 import './Details.scss';
 
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-import { loadCharacter } from '../../api/service';
-import { convertCharIDtoUrl } from '../../util/constants';
+import { ICharacter } from '../../types/interfaces';
 import DetailsSpinner from '../Spinner/DetailsSpinner';
-
 const Details: React.FC = () => {
-  const { charID } = useParams();
-  const url = convertCharIDtoUrl(Number(charID));
-
-  const { response, isLoading } = loadCharacter(url);
-  console.log(isLoading);
-
+  const char = useLoaderData() as ICharacter;
+  console.log('CHAR: ', char);
   return (
     <div className='details'>
-      {isLoading ? (
+      {!char ? (
         <DetailsSpinner />
       ) : (
         <>
-          <h2>{response.name}</h2>
+          <h2>{char.name}</h2>
           <p>
             Birth year:
-            <span>{response.birth_year}</span>
+            <span>{char.birth_year}</span>
           </p>
           <p>
             Eye color:
-            <span>{response.eye_color}</span>
+            <span>{char.eye_color}</span>
           </p>
           <p>
-            Gender:<span>{response.gender}</span>
+            Gender:<span>{char.gender}</span>
           </p>
           <p>
-            Hair color:<span>{response.hair_color}</span>
+            Hair color:<span>{char.hair_color}</span>
           </p>
           <p>
-            Height:<span>{response.height}</span>
+            Height:<span>{char.height}</span>
           </p>
           <p>
-            Mass:<span>{response.mass}</span>
+            Mass:<span>{char.mass}</span>
           </p>
           <p>
-            Skin color:<span>{response.skin_color}</span>
+            Skin color:<span>{char.skin_color}</span>
           </p>
         </>
       )}

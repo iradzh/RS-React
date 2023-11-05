@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Params } from 'react-router-dom';
 
 import { IApiResponse, ICharacter } from '../types/interfaces';
 
@@ -18,6 +19,7 @@ export const loadList = (param: string) => {
   const fetchData = async (url: string) => {
     try {
       setIsLoading(true);
+      console.log(url);
       const res = await axios(url);
       setResponse(res.data);
       setIsLoading(false);
@@ -38,32 +40,27 @@ export const loadList = (param: string) => {
   };
 };
 
-export const loadCharacter = (param: string) => {
-  const [response, setResponse] = useState<ICharacter>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+interface RouteParams {
+  params: Params;
+}
 
-  axios.defaults.baseURL = 'https://swapi.dev/api/people';
+export const loadListSimple = async (param: RouteParams) => {
+  let url = '';
+  if (param.params['page']) {
+    url = 'https://swapi.dev/api/people/?page=' + param.params['page'];
+  } else {
+    url = 'https://swapi.dev/api/people';
+  }
 
-  const fetchData = async (url: string) => {
-    try {
-      setIsLoading(true);
-      const res = await axios(url);
-      setResponse(res.data);
-      setIsLoading(false);
-    } catch (err) {
-      setError(err as string);
-    }
-  };
+  const res = await fetch(url);
 
-  useEffect(() => {
-    fetchData(param);
-  }, [param]);
+  return res.json() as Promise<IApiResponse>;
+};
 
-  return {
-    response,
-    isLoading,
-    error,
-    fetchData: (url: string) => fetchData(url),
-  };
+export const loadCharacter = async (param: RouteParams) => {
+  const res = await fetch(
+    `https://swapi.dev/api/people/${param.params['charID']}`
+  );
+
+  return res.json() as Promise<ICharacter>;
 };

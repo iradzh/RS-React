@@ -2,7 +2,7 @@ import './Settings.scss';
 
 import { useContext } from 'react';
 
-import { CharacterContext } from '../../pages/Home/Home';
+import { CharacterContext } from '../../pages/Page/Page';
 
 const Settings: React.FC = () => {
   const { response, isLoading, fetchData } = useContext(CharacterContext);

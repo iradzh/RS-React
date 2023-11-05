@@ -1,29 +1,28 @@
 import './CharacterList.scss';
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { CharacterContext } from '../../pages/Home/Home';
-import { ICharacter } from '../../types/interfaces';
+import { ICharacter, ICharacterListProps } from '../../types/interfaces';
 import { convertUrltoCharId } from '../../util/constants';
 import Character from '../Character/Charachter';
-import Spinner from '../Spinner/Spinner';
 
-const CharacterList: React.FC = () => {
-  const { response, isLoading } = useContext(CharacterContext);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
+const CharacterList: React.FC<ICharacterListProps> = (
+  props: ICharacterListProps
+) => {
+  const chars = props.response.results;
 
   return (
     <div className='char_list'>
-      {response.results.length < 1 ? (
+      {chars.length < 1 ? (
         <div>No data available.</div>
       ) : (
-        response.results.map((data: ICharacter, key: number) => (
-          <Link to={`/details/${convertUrltoCharId(data.url)}`} key={key}>
-            <Character char={data} />
+        chars.map((char: ICharacter, key: number) => (
+          <Link
+            to={`/${props.page}/details/${convertUrltoCharId(char.url)}`}
+            key={key}
+          >
+            <Character char={char} key={key} />
           </Link>
         ))
       )}

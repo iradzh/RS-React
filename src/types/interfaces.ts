@@ -10,26 +10,21 @@ export interface IAppState {
 }
 
 export interface ICharacter {
-  id?: number;
-  name?: string;
-  birth_year?: string;
-  eye_color?: string;
-  skin_color?: string;
-  gender?: string;
-  height?: string;
-  mass?: string;
-  hair_color?: string;
-  url?: string;
+  id: number;
+  name: string;
+  birth_year: string;
+  eye_color: string;
+  skin_color: string;
+  gender: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+  url: string;
 }
 
 export interface ICharacterProps {
   char: ICharacter;
   key: number;
-}
-
-export interface ICharacterListProps {
-  characters: ICharacter[];
-  loading: boolean;
 }
 
 export interface IErrBoundProps {
@@ -68,7 +63,6 @@ export interface IApiResponse {
 }
 
 export interface ICharacterListProps {
-  onItemClick: (name: string) => void;
-  characters: ICharacter[];
-  loading: boolean;
+  response: IApiResponse;
+  page: number;
 }

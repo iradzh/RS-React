@@ -20,9 +20,15 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 .root-layout {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.home {
+  min-width: calc(100% - 16em);
 }
