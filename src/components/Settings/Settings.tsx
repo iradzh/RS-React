@@ -65,13 +65,13 @@ const Settings: React.FC<ICharacterListProps> = (prop) => {
       <div className='pagination'>
         <Link
           to={prevPage}
-          className={prevPage ? 'pagination_active' : 'pagination_disabled'}
+          className={prevPage ? 'pagination__active' : 'pagination_disabled'}
         >
           &lt;
         </Link>
         <Link
           to={nextPage}
-          className={nextPage ? 'pagination_active' : 'pagination_disabled'}
+          className={nextPage ? 'pagination__active' : 'pagination_disabled'}
         >
           &gt;
         </Link>

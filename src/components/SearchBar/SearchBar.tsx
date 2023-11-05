@@ -34,14 +34,10 @@ const SearchBar: React.FC<ICharacterListProps> = (
         onChange={(e) => setSearchChar(e.target.value)}
       />
 
-      {/* <button className='searchbar__btn search__btn' onClick={handleSearch}>
-        Search
-      </button> */}
-      <Link
-        to={`/?perPage=${props.loadedData.perPage}&search=${searchChar}`}
-        onClick={handleSearch}
-      >
-        SEARCH
+      <Link to={`/?perPage=${props.loadedData.perPage}&search=${searchChar}`}>
+        <button className='searchbar__btn search__btn' onClick={handleSearch}>
+          Search
+        </button>
       </Link>
       <Link to='/'>
         <button className='searchbar__btn clear__btn' onClick={clearSearch}>

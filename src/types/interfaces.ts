@@ -1,15 +1,4 @@
-import { ChangeEvent } from 'react';
-
-import { ILoadedData } from '../api/service';
-
-export interface IAppState {
-  searchChar: string;
-  searchResults: ICharacter[];
-  loading: boolean;
-  charList: ICharacter[];
-  charPerPage: number;
-  currentPage: 1;
-}
+import { Params } from 'react-router-dom';
 
 export interface ICharacter {
   id: number;
@@ -24,11 +13,6 @@ export interface ICharacter {
   url: string;
 }
 
-export interface ICharacterProps {
-  char: ICharacter;
-  key: number;
-}
-
 export interface IErrBoundProps {
   children: React.ReactNode;
 }
@@ -37,25 +21,7 @@ export interface IErrBoundState {
   hasError: boolean;
 }
 
-export interface ISearchBarProps {
-  searchChar: string;
-  onSearch: (searchChar: string) => void;
-  onClear: () => void;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
-
-export interface ISearchBarState {
-  searchChar: string;
-}
-
 export interface IErrorTriggerProps {}
-
-export interface IValue {
-  response: IApiResponse;
-  isLoading: boolean;
-  error: string;
-  fetchData: (url: string) => void;
-}
 
 export interface IApiResponse {
   count: number;
@@ -67,4 +33,14 @@ export interface IApiResponse {
 export interface ICharacterListProps {
   loadedData: ILoadedData;
   page: number;
+}
+
+export interface IRouteParams {
+  params: Params;
+  request: Request;
+}
+
+export interface ILoadedData {
+  res: IApiResponse;
+  perPage: number;
 }

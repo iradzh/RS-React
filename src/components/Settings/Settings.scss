@@ -36,46 +36,29 @@
   justify-content: space-between;
   align-items: center;
   width: 75%;
-  // gap: 1em;
   margin: 1em auto;
-  button {
+  a {
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #9fff82;
     font-weight: 800;
     border-radius: 8px;
-    border: 1px solid #9fff82;
     background-color: #000000;
-    width: 3em;
-    height: 2.6em;
+    width: 2.4em;
+    height: 2.2em;
     transition: all ease 0.3s;
   }
-  button:hover {
-    cursor: pointer;
-    background-color: white;
-    color: #000000;
-  }
-  button:disabled {
-    cursor: auto;
-    color: #9fff8260;
-    border: 1px solid #9fff8237;
-    &:hover {
-      background-color: black;
-    }
-  }
-}
-
-.pagination_active {
-  color: greenyellow;
 }
 
 .pagination_disabled {
-  color: pink;
+  color: #9fff8272;
+  border: 1px solid #9fff8272;
   pointer-events: none;
-  &:hover {
-    background-color: rgb(188, 1, 1);
-  }
+}
+
+.pagination__active {
+  color: #9fff82;
+  border: 1px solid #9fff82;
 }

@@ -12,7 +12,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+.page {
   margin: 0;
   min-width: 280px;
   min-height: 100vh;
@@ -25,10 +25,9 @@ a {
 
 .root-layout {
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
-.home {
-  min-width: calc(100% - 16em);
+.page-layout {
+  display: flex;
 }
