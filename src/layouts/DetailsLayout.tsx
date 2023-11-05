@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Details from '../components/Details/Details';
 
 const DetailsLayout = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const detailId = searchParams.get('detailId');
 

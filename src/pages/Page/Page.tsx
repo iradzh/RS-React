@@ -25,7 +25,6 @@ export const Page = () => {
 
     if (location.search.indexOf('detailId') > 0) {
       const url = location.search.slice(0, location.search.lastIndexOf('&'));
-      console.log('URL', url);
       navigate(url);
     }
   };
