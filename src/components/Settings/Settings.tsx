@@ -1,36 +1,36 @@
 import './Settings.scss';
 
-import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-import { CharacterContext } from '../../pages/Page/Page';
+import { ICharacterListProps } from '../../types/interfaces';
 
-const Settings: React.FC = () => {
-  const { response, isLoading, fetchData } = useContext(CharacterContext);
+const Settings: React.FC<ICharacterListProps> = (prop) => {
+  let nextPage = '';
+  if (prop.response.next) {
+    nextPage = `/${prop.page + 1}`;
+  }
 
-  const handleNextPage = () => {
-    if (response.next) {
-      fetchData(response.next);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (response.previous) {
-      fetchData(response.previous);
-    }
-  };
+  let prevPage = '';
+  if (prop.response.previous) {
+    prevPage = `/${prop.page - 1}`;
+  }
 
   return (
     <div className='settings'>
-      {!isLoading && (
-        <div className='pagination'>
-          <button onClick={handlePrevPage} disabled={!response.previous}>
-            &lt;
-          </button>
-          <button onClick={handleNextPage} disabled={!response.next}>
-            &gt;
-          </button>
-        </div>
-      )}
+      <div className='pagination'>
+        <Link
+          to={prevPage}
+          className={prevPage ? 'pagination_active' : 'pagination_disabled'}
+        >
+          &lt;
+        </Link>
+        <Link
+          to={nextPage}
+          className={prevPage ? 'pagination_active' : 'pagination_disabled'}
+        >
+          &gt;
+        </Link>
+      </div>
     </div>
   );
 };

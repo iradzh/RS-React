@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from 'react-router-dom';
 
 import CharacterList from '../../components/CharacterList/CharacterList';
+import Settings from '../../components/Settings/Settings';
 import { IApiResponse } from '../../types/interfaces';
 
 export const Page = () => {
@@ -8,5 +9,10 @@ export const Page = () => {
   const response = useLoaderData() as IApiResponse;
   console.log('PAGE ', page);
 
-  return <CharacterList response={response} page={page ? +page : 1} />;
+  return (
+    <>
+      <CharacterList response={response} page={page ? +page : 1} />
+      <Settings response={response} page={page ? +page : 1} />
+    </>
+  );
 };
