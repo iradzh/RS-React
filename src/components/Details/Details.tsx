@@ -44,7 +44,9 @@ const Details: React.FC = () => {
         <p>
           Skin color:<span>{char.skin_color}</span>
         </p>
-        <button onClick={closeDetails}>Close</button>
+        <button onClick={closeDetails} className='details__btn'>
+          Close
+        </button>
       </div>
     );
   }
