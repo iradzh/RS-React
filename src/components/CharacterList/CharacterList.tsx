@@ -13,6 +13,9 @@ const CharacterList: React.FC<ICharacterListProps> = (
 ) => {
   const chars = props.loadedData.res.results;
   const perPage = props.loadedData.perPage;
+  const search = props.loadedData.search
+    ? `&search=${props.loadedData.search}`
+    : '';
 
   return (
     <div className='char_list'>
@@ -24,7 +27,11 @@ const CharacterList: React.FC<ICharacterListProps> = (
       ) : (
         chars.slice(0, perPage).map((char: ICharacter, key: number) => (
           <Link
-            to={`/${props.page}/details/${convertUrltoCharId(char.url)}`}
+            to={`/${
+              props.page
+            }?perPage=${perPage}${search}&detailId=${convertUrltoCharId(
+              char.url
+            )}`}
             key={key}
           >
             <Character char={char} key={key} />

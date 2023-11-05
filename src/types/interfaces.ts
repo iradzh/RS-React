@@ -43,4 +43,5 @@ export interface IRouteParams {
 export interface ILoadedData {
   res: IApiResponse;
   perPage: number;
+  search?: string;
 }

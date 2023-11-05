@@ -1,11 +1,19 @@
-import { Outlet } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+
+import Details from '../components/Details/Details';
 
 const DetailsLayout = () => {
-  return (
-    <div className='details-layout'>
-      <Outlet />
-    </div>
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const detailId = searchParams.get('detailId');
+
+  if (detailId) {
+    return (
+      <div className='details-layout'>
+        <Details />
+      </div>
+    );
+  } else return;
 };
 
 export default DetailsLayout;

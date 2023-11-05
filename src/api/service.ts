@@ -19,14 +19,18 @@ export const loadListSimple = async (param: IRouteParams) => {
   const loadedData = {
     res: (await res.json()) as IApiResponse,
     perPage: perPage ? perPage : 10,
+    search: search,
   };
   return loadedData;
 };
 
 export const loadCharacter = async (param: IRouteParams) => {
-  const res = await fetch(
-    `https://swapi.dev/api/people/${param.params['charID']}`
-  );
+  const detailId = new URL(param.request.url).searchParams.get('detailId');
 
-  return res.json() as Promise<ICharacter>;
+  if (detailId) {
+    const res = await fetch(`https://swapi.dev/api/people/${detailId}`);
+    return res.json() as Promise<ICharacter>;
+  }
+
+  return null;
 };

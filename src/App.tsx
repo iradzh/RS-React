@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 
 import { loadCharacter, loadListSimple } from './api/service';
-import Details from './components/Details/Details';
 import DetailsLayout from './layouts/DetailsLayout';
 import { PageLayout } from './layouts/PageLayout';
 import { RootLayout } from './layouts/RootLayout';
@@ -19,9 +18,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<PageLayout />} loader={loadListSimple} />
       <Route path=':page' element={<PageLayout />} loader={loadListSimple}>
-        <Route path='details' element={<DetailsLayout />}>
-          <Route path=':charID' element={<Details />} loader={loadCharacter} />
-        </Route>
+        <Route index element={<DetailsLayout />} loader={loadCharacter} />
       </Route>
       <Route path='*' element={<NotFoundPage />} />
     </Route>
