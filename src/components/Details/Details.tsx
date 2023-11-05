@@ -4,9 +4,9 @@ import { useLoaderData } from 'react-router-dom';
 
 import { ICharacter } from '../../types/interfaces';
 import DetailsSpinner from '../Spinner/DetailsSpinner';
+
 const Details: React.FC = () => {
   const char = useLoaderData() as ICharacter;
-  console.log('CHAR: ', char);
   return (
     <div className='details'>
       {!char ? (

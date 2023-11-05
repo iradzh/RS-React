@@ -1,5 +1,7 @@
 import { ChangeEvent } from 'react';
 
+import { ILoadedData } from '../api/service';
+
 export interface IAppState {
   searchChar: string;
   searchResults: ICharacter[];
@@ -63,6 +65,6 @@ export interface IApiResponse {
 }
 
 export interface ICharacterListProps {
-  response: IApiResponse;
+  loadedData: ILoadedData;
   page: number;
 }

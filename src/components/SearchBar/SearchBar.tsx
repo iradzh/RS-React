@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ICharacterListProps } from '../../types/interfaces';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<ICharacterListProps> = (
+  props: ICharacterListProps
+) => {
   const storageSearch = localStorage.getItem('search');
   const [searchChar, setSearchChar] = useState(
     storageSearch ? storageSearch : ''
@@ -34,7 +37,10 @@ const SearchBar: React.FC = () => {
       {/* <button className='searchbar__btn search__btn' onClick={handleSearch}>
         Search
       </button> */}
-      <Link to={`/?search=${searchChar}`} onClick={handleSearch}>
+      <Link
+        to={`/?perPage=${props.loadedData.perPage}&search=${searchChar}`}
+        onClick={handleSearch}
+      >
         SEARCH
       </Link>
       <Link to='/'>

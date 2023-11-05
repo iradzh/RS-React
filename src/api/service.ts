@@ -45,11 +45,17 @@ interface RouteParams {
   request: Request;
 }
 
+export interface ILoadedData {
+  res: IApiResponse;
+  perPage: number;
+}
+
 export const loadListSimple = async (param: RouteParams) => {
   console.log(param);
   let url = 'https://swapi.dev/api/people';
 
   const search = new URL(param.request.url).searchParams.get('search');
+  const perPage = new URL(param.request.url).searchParams.get('perPage');
 
   if (param.params['page'] && search) {
     url = url.concat(`/?page=${param.params['page']}&search=${search}`);
@@ -61,7 +67,11 @@ export const loadListSimple = async (param: RouteParams) => {
 
   const res = await fetch(url);
 
-  return res.json() as Promise<IApiResponse>;
+  const loadedData = {
+    res: (await res.json()) as IApiResponse,
+    perPage: perPage ? perPage : 10,
+  };
+  return loadedData;
 };
 
 export const loadCharacter = async (param: RouteParams) => {
