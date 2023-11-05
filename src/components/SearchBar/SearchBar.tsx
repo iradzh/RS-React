@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
 const SearchBar: React.FC = () => {
-  const [searchChar, setSearchChar] = useState('');
+  const storageSearch = localStorage.getItem('search');
+  const [searchChar, setSearchChar] = useState(
+    storageSearch ? storageSearch : ''
+  );
 
   const handleSearch = () => {
     if (searchChar) {
       localStorage.setItem('search', searchChar);
-      // fetchData(`/?search=${searchChar}`);
     }
   };
 
@@ -29,9 +31,12 @@ const SearchBar: React.FC = () => {
         onChange={(e) => setSearchChar(e.target.value)}
       />
 
-      <button className='searchbar__btn search__btn' onClick={handleSearch}>
+      {/* <button className='searchbar__btn search__btn' onClick={handleSearch}>
         Search
-      </button>
+      </button> */}
+      <Link to={`/?search=${searchChar}`} onClick={handleSearch}>
+        SEARCH
+      </Link>
       <Link to='/'>
         <button className='searchbar__btn clear__btn' onClick={clearSearch}>
           Clear

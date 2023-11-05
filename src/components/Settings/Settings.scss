@@ -69,7 +69,13 @@
 }
 
 .pagination_active {
+  color: greenyellow;
 }
 
 .pagination_disabled {
+  color: pink;
+  pointer-events: none;
+  &:hover {
+    background-color: rgb(188, 1, 1);
+  }
 }

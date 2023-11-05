@@ -42,14 +42,21 @@ export const loadList = (param: string) => {
 
 interface RouteParams {
   params: Params;
+  request: Request;
 }
 
 export const loadListSimple = async (param: RouteParams) => {
-  let url = '';
-  if (param.params['page']) {
-    url = 'https://swapi.dev/api/people/?page=' + param.params['page'];
-  } else {
-    url = 'https://swapi.dev/api/people';
+  console.log(param);
+  let url = 'https://swapi.dev/api/people';
+
+  const search = new URL(param.request.url).searchParams.get('search');
+
+  if (param.params['page'] && search) {
+    url = url.concat(`/?page=${param.params['page']}&search=${search}`);
+  } else if (search) {
+    url = url.concat(`/?search=${search}`);
+  } else if (param.params['page']) {
+    url = url.concat(`/?page=${param.params['page']}`);
   }
 
   const res = await fetch(url);
