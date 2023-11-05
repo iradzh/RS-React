@@ -1,0 +1,40 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 16em;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 0.8em 1.4em;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  h2 {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+
+    span {
+      margin-left: 1em;
+      font-weight: 800;
+    }
+  }
+}
+
+.details__btn {
+  height: 2.4em;
+  padding: 0.2em 0.6em;
+  font-size: 1.1em;
+  border-radius: 6px;
+  border: 1px solid #9fff82;
+  background-color: #9fff82;
+  transition: all ease 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
