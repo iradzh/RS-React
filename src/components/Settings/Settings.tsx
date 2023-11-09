@@ -1,37 +1,34 @@
 import './Settings.scss';
 
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { ICharacterListProps } from '../../types/interfaces';
+import { AppContext } from '../../context/ContextProvider';
 
-const Settings: React.FC<ICharacterListProps> = (prop) => {
-  const [perPage, setPerPage] = useState(prop.loadedData.perPage);
+const Settings = () => {
   const navigate = useNavigate();
 
+  const { search, response, perPage, updatePerPage, pageNum, updatePageNum } =
+    useContext(AppContext);
+
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setPerPage(+e.target.value);
+    updatePerPage(+e.target.value);
     navigate(`/?perPage=${+e.target.value}`);
   };
 
-  const nextUrl = prop.loadedData.res.next
-    ? new URL(prop.loadedData.res.next!)
-    : null;
-  const prevUrl = prop.loadedData.res.previous
-    ? new URL(prop.loadedData.res.previous)
-    : null;
+  const nextUrl = response.next ? new URL(response.next) : null;
+  const prevUrl = response.previous ? new URL(response.previous) : null;
 
-  const search = nextUrl ? nextUrl.searchParams.get('search') : null;
   const prvPageNr = prevUrl ? prevUrl.searchParams.get('page') : 1;
   const nextPageNr = nextUrl ? nextUrl.searchParams.get('page') : null;
 
   let nextPage = '';
-  if (prop.loadedData.res.next) {
+  if (response.next) {
     nextPage = `/${nextPageNr}?perPage=${perPage}`;
   }
 
   let prevPage = '';
-  if (prop.loadedData.res.previous) {
+  if (response.previous) {
     prevPage = `/${prvPageNr}?perPage=${perPage}`;
   }
 
@@ -44,6 +41,7 @@ const Settings: React.FC<ICharacterListProps> = (prop) => {
       : `?search=${search}`;
   }
 
+  updatePageNum(nextPageNr ? +nextPageNr - 1 : 1);
   return (
     <div className='settings'>
       <select
@@ -65,16 +63,14 @@ const Settings: React.FC<ICharacterListProps> = (prop) => {
       <div className='pagination'>
         <Link
           to={prevPage}
-          className={prevPage ? 'pagination__active' : 'pagination_disabled'}
+          className={prevUrl ? 'pagination__active' : 'pagination_disabled'}
         >
           &lt;
         </Link>
-        <span className='pagination__current'>
-          {nextPageNr ? +nextPageNr - 1 : 1}
-        </span>
+        <span className='pagination__current'>{pageNum}</span>
         <Link
           to={nextPage}
-          className={nextPage ? 'pagination__active' : 'pagination_disabled'}
+          className={nextUrl ? 'pagination__active' : 'pagination_disabled'}
         >
           &gt;
         </Link>

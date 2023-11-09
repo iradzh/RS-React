@@ -1,26 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ICharacterListProps } from '../../types/interfaces';
+import { AppContext } from '../../context/ContextProvider';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
-const SearchBar: React.FC<ICharacterListProps> = (
-  props: ICharacterListProps
-) => {
-  const storageSearch = localStorage.getItem('search');
-  const [searchChar, setSearchChar] = useState(
-    storageSearch ? storageSearch : ''
-  );
+const SearchBar = () => {
+  const { search, updateSearch, perPage } = useContext(AppContext);
 
   const handleSearch = () => {
-    if (searchChar) {
-      localStorage.setItem('search', searchChar);
+    if (search) {
+      updateSearch(search);
     }
   };
 
   const clearSearch = () => {
     localStorage.clear();
-    setSearchChar('');
+    updateSearch('');
   };
 
   return (
@@ -31,15 +26,16 @@ const SearchBar: React.FC<ICharacterListProps> = (
         type='text'
         placeholder='Explore Star Wars characters'
         className='searchbar__input'
-        onChange={(e) => setSearchChar(e.target.value)}
+        value={search}
+        onChange={(e) => updateSearch(e.target.value)}
       />
 
-      <Link to={`/?perPage=${props.loadedData.perPage}&search=${searchChar}`}>
+      <Link to={`/?perPage=${perPage}&search=${search}`}>
         <button className='searchbar__btn search__btn' onClick={handleSearch}>
           Search
         </button>
       </Link>
-      <Link to={`/?perPage=${props.loadedData.perPage}`}>
+      <Link to={`/?perPage=${perPage}`}>
         <button className='searchbar__btn clear__btn' onClick={clearSearch}>
           Clear
         </button>
