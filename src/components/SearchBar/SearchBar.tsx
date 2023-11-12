@@ -28,10 +28,15 @@ const SearchBar = () => {
         className='searchbar__input'
         value={search}
         onChange={(e) => updateSearch(e.target.value)}
+        data-testid='searchInput'
       />
 
       <Link to={`/?perPage=${perPage}&search=${search}`}>
-        <button className='searchbar__btn search__btn' onClick={handleSearch}>
+        <button
+          className='searchbar__btn search__btn'
+          onClick={handleSearch}
+          data-testid='searchBtn'
+        >
           Search
         </button>
       </Link>
