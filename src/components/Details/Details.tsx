@@ -19,34 +19,40 @@ const Details: React.FC = () => {
 
   if (char) {
     return (
-      <div className='details'>
+      <div className='details' data-testid='details'>
         <h2>Details</h2>
 
-        <h2>{char.name}</h2>
+        <h2 data-testid='details-name'>{char.name}</h2>
         <p>
           Birth year:
-          <span>{char.birth_year}</span>
+          <span data-testid='details-birth_year'>{char.birth_year}</span>
         </p>
         <p>
           Eye color:
-          <span>{char.eye_color}</span>
+          <span data-testid='details-eye_color'>{char.eye_color}</span>
         </p>
         <p>
-          Gender:<span>{char.gender}</span>
+          Gender:<span data-testid='details-gender'>{char.gender}</span>
         </p>
         <p>
-          Hair color:<span>{char.hair_color}</span>
+          Hair color:
+          <span data-testid='details-hair_color'>{char.hair_color}</span>
         </p>
         <p>
-          Height:<span>{char.height}</span>
+          Height:<span data-testid='details-height'>{char.height}</span>
         </p>
         <p>
-          Mass:<span>{char.mass}</span>
+          Mass:<span data-testid='details-mass'>{char.mass}</span>
         </p>
         <p>
-          Skin color:<span>{char.skin_color}</span>
+          Skin color:
+          <span data-testid='details-skin_color'>{char.skin_color}</span>
         </p>
-        <button onClick={closeDetails} className='details__btn'>
+        <button
+          onClick={closeDetails}
+          className='details__btn'
+          data-testid='details-close'
+        >
           Close
         </button>
       </div>

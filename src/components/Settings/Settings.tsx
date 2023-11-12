@@ -64,6 +64,7 @@ const Settings = () => {
         <Link
           to={prevPage}
           className={prevUrl ? 'pagination__active' : 'pagination_disabled'}
+          data-testid='prevPageBtn'
         >
           &lt;
         </Link>
@@ -71,6 +72,7 @@ const Settings = () => {
         <Link
           to={nextPage}
           className={nextUrl ? 'pagination__active' : 'pagination_disabled'}
+          data-testid='nextPageBtn'
         >
           &gt;
         </Link>

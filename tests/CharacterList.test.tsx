@@ -26,22 +26,22 @@ test('Verify that the component renders the specified number of cards', async ()
   expect(cards).toHaveLength(10);
 });
 
-// test('Check that an appropriate message is displayed if no cards are present', async () => {
-//   const routes = [
-//     {
-//       path: '/',
-//       element: <PageLayout />,
-//       loader: loadListSimple,
-//     },
-//   ];
+test('Check that an appropriate message is displayed if no cards are present', async () => {
+  const routes = [
+    {
+      path: '/:page',
+      element: <PageLayout />,
+      loader: loadListSimple,
+    },
+  ];
 
-//   const router = createMemoryRouter(routes, {
-//     initialEntries: ['/'],
-//   });
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/999'],
+  });
 
-//   render(<RouterProvider router={router} />);
+  render(<RouterProvider router={router} />);
 
-//   await waitFor(() => screen.getByText('No data available'));
+  await waitFor(() => screen.getByText('No data available'));
 
-//   expect(screen.getByText('No data available')).toBeInTheDocument();
-// });
+  expect(screen.getByText('No data available')).toBeInTheDocument();
+});

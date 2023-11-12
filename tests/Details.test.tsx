@@ -5,33 +5,44 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 import { loadCharacter, loadListSimple } from '../src/api/service';
-import Character from '../src/components/Character/Charachter';
 import DetailsLayout from '../src/layouts/DetailsLayout';
 import { PageLayout } from '../src/layouts/PageLayout';
-import { recordedRequests } from './mocks/server';
 
-test('Ensure that the card component renders the relevant card data', () => {
-  const charData = {
-    id: 1,
-    name: 'Luke Skywalker',
-    birth_year: '19BBY',
-    gender: 'male',
-    eye_color: 'blue',
-    skin_color: 'fair',
-    height: '172',
-    mass: '77',
-    hair_color: 'fair',
-    url: 'https://swapi.dev/api/people/1/',
-  };
+test('Check that a loading indicator is displayed while fetching data;', async () => {
+  const routes = [
+    {
+      path: '/:page',
+      element: <PageLayout />,
+      loader: loadListSimple,
+      children: [
+        {
+          path: '',
+          element: <DetailsLayout />,
+          loader: loadCharacter,
+        },
+      ],
+    },
+  ];
 
-  render(<Character char={charData} />);
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/1'],
+  });
 
-  expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
-  expect(screen.getByText('19BBY')).toBeInTheDocument();
-  expect(screen.getByText('male')).toBeInTheDocument();
+  render(<RouterProvider router={router} />);
+
+  await waitFor(() => screen.getByText('C-3PO'));
+
+  const cardLink = screen.getByText('C-3PO').closest('a');
+
+  await userEvent.click(cardLink!);
+  expect(
+    screen.getByText(
+      'The Force will guide us through this delay caused by a sluggish API'
+    )
+  ).toBeInTheDocument();
 });
 
-test('Validate that clicking on a card opens a detailed card component', async () => {
+test('Make sure the detailed card component correctly displays the detailed card data', async () => {
   const routes = [
     {
       path: '/:page',
@@ -61,12 +72,19 @@ test('Validate that clicking on a card opens a detailed card component', async (
 
     await waitFor(() => screen.getByText('Details'));
     expect(screen.getByTestId('details')).toBeInTheDocument();
+    expect(screen.getByTestId('details-name').textContent).toEqual(
+      'Luke Skywalker'
+    );
+    expect(screen.getByTestId('details-mass').textContent).toEqual('77');
+    expect(screen.getByTestId('details-skin_color').textContent).toEqual(
+      'fair'
+    );
   } else {
     console.error('Card link not found.');
   }
 });
 
-test('Check that clicking triggers an additional API call to fetch detailed information', async () => {
+test('Ensure that clicking the close button hides the component.', async () => {
   const routes = [
     {
       path: '/:page',
@@ -88,15 +106,14 @@ test('Check that clicking triggers an additional API call to fetch detailed info
 
   render(<RouterProvider router={router} />);
   await waitFor(() => screen.getByText('Luke Skywalker'));
+
   const cardLink = screen.getByText('Luke Skywalker').closest('a');
-
-  const requestsBeforeClick = recordedRequests.filter(
-    (r) => r.url === 'https://swapi.dev/api/people/1'
-  ).length;
-
   await userEvent.click(cardLink!);
 
-  expect(
-    recordedRequests.filter((r) => r.url === 'https://swapi.dev/api/people/1')
-  ).toHaveLength(requestsBeforeClick + 1);
+  await waitFor(() => screen.getByTestId('details'));
+
+  const closeLink = screen.getByTestId('details-close');
+  await userEvent.click(closeLink);
+
+  expect(await screen.queryByTestId('details')).toBeNull();
 });

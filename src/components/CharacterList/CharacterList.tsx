@@ -11,11 +11,10 @@ import Character from '../Character/Charachter';
 
 const CharacterList = () => {
   const { search, charList, perPage, pageNum } = useContext(AppContext);
-  console.log('CHARS', charList);
 
   return (
     <div className='char_list'>
-      {charList.length < 1 ? (
+      {!charList || charList.length < 1 ? (
         <div className='char_list__empty'>
           <img src={gial} alt='Gial' />
           <p>No data available</p>

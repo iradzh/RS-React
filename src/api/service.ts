@@ -22,7 +22,6 @@ export const loadListSimple = async (param: IRouteParams) => {
     search: search,
   };
 
-  window.console.log('LOADED DATA', loadedData.res.results);
   return loadedData;
 };
 
