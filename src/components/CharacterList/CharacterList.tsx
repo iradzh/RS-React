@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 import gial from '../../assets/gial.png';
 import { AppContext } from '../../context/ContextProvider';
 import { ICharacter } from '../../types/interfaces';
-import { convertUrltoCharId } from '../../util/constants';
+import { convertUrltoCharId } from '../../util/utilFunctions';
 import Character from '../Character/Charachter';
 
 const CharacterList = () => {
   const { search, charList, perPage, pageNum } = useContext(AppContext);
+  console.log('CHARS', charList);
 
   return (
     <div className='char_list'>

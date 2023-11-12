@@ -6,7 +6,7 @@ import { ICharacter } from '../../types/interfaces';
 
 const Character: React.FC<{ char: ICharacter }> = ({ char }) => {
   return (
-    <div className='char'>
+    <div className='char' data-testid='character-card'>
       <h1 className='char__name'>{char.name}</h1>
       <p className='char__text'>
         Birth year: <span>{char.birth_year}</span>

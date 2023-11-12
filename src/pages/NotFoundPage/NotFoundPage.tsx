@@ -6,8 +6,8 @@ export const NotFoundPage = () => {
   return (
     <div className='not_found'>
       <h1>
-        Error 404: The Force is not with this page. <br />
-        Embrace the dark side, and lets find another way.
+        Error 404: The Force is not with this page. Embrace the dark side, and
+        lets find another way.
       </h1>
 
       <p>

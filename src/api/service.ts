@@ -21,6 +21,8 @@ export const loadListSimple = async (param: IRouteParams) => {
     perPage: perPage ? perPage : 10,
     search: search,
   };
+
+  window.console.log('LOADED DATA', loadedData.res.results);
   return loadedData;
 };
 

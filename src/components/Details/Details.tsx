@@ -20,6 +20,8 @@ const Details: React.FC = () => {
   if (char) {
     return (
       <div className='details'>
+        <h2>Details</h2>
+
         <h2>{char.name}</h2>
         <p>
           Birth year:
