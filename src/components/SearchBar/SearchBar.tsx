@@ -1,21 +1,25 @@
-import { useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../context/ContextProvider';
+import { clearSearchValue, setSearchValue } from '../../store/searchSlice';
+import { IRootState } from '../../types/interfaces';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
 const SearchBar = () => {
-  const { search, updateSearch, perPage } = useContext(AppContext);
+  const perPage = useSelector((state: IRootState) => state.perPage);
+
+  const [searchWord, setSearchWord] = useState('');
+  const dispatch = useDispatch();
 
   const handleSearch = () => {
-    if (search) {
-      updateSearch(search);
-    }
+    dispatch(setSearchValue(searchWord));
   };
 
   const clearSearch = () => {
     localStorage.clear();
-    updateSearch('');
+    dispatch(clearSearchValue());
+    setSearchWord('');
   };
 
   return (
@@ -26,12 +30,12 @@ const SearchBar = () => {
         type='text'
         placeholder='Explore Star Wars characters'
         className='searchbar__input'
-        value={search}
-        onChange={(e) => updateSearch(e.target.value)}
+        value={searchWord}
+        onChange={(e) => setSearchWord(e.target.value)}
         data-testid='searchInput'
       />
 
-      <Link to={`/?perPage=${perPage}&search=${search}`}>
+      <Link to={`/?perPage=${perPage}&search=${searchWord}`}>
         <button
           className='searchbar__btn search__btn'
           onClick={handleSearch}

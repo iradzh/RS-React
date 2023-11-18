@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { Params } from 'react-router-dom';
 
 export interface ICharacter {
@@ -47,18 +46,15 @@ export interface ILoadedData {
   search?: string;
 }
 
-export interface IAppContextProviderProps {
-  children: ReactNode;
-}
-export interface IAppContext {
+export interface IRootState {
   search: string;
-  updateSearch: (newSearch: string) => void;
-  charList: ICharacter[];
-  updateCharList: (loadedData: ILoadedData) => void;
-  response: IApiResponse;
-  updateResponse: (loadedData: ILoadedData) => void;
   perPage: number;
-  updatePerPage: (newPerPage: number) => void;
   pageNum: number;
-  updatePageNum: (newPageNum: number) => void;
+  isMainLoading: boolean;
+  isDetailsLoading: boolean;
+}
+
+export interface IActionBool {
+  payload: boolean;
+  type: string;
 }

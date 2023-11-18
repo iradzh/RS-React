@@ -1,16 +1,18 @@
+import { Provider } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import AppContextProvider from '../context/ContextProvider';
 import { Page } from '../pages/Page/Page';
+import { store } from '../store/store';
+
 export const PageLayout = () => {
   return (
     <div className='page-layout'>
-      <AppContextProvider>
+      <Provider store={store}>
         <Page />
         <>
           <Outlet />
         </>
-      </AppContextProvider>
+      </Provider>
     </div>
   );
 };

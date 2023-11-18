@@ -1,12 +1,10 @@
 import './Details.scss';
 
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { ICharacter } from '../../types/interfaces';
+import { useGetDetailsQuery } from '../../store/api';
 
 const Details: React.FC = () => {
-  const char = useLoaderData() as ICharacter;
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,6 +14,12 @@ const Details: React.FC = () => {
       navigate(url);
     }
   };
+
+  const id = location.search.slice(location.search.lastIndexOf('=') + 1);
+
+  const { data = [] } = useGetDetailsQuery(id);
+
+  const char = data;
 
   if (char) {
     return (

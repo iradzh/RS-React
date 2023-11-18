@@ -1,15 +1,24 @@
 import './Settings.scss';
 
-import { ChangeEvent, useContext } from 'react';
+import { ChangeEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../../context/ContextProvider';
+import { useGetCharsQuery } from '../../store/api';
+import { updatePageNum } from '../../store/pageNumSlice';
+import { updatePerPage } from '../../store/perPageSlice';
+import { IRootState } from '../../types/interfaces';
 
 const Settings = () => {
   const navigate = useNavigate();
 
-  const { search, response, perPage, updatePerPage, pageNum, updatePageNum } =
-    useContext(AppContext);
+  const { data = [] } = useGetCharsQuery();
+
+  const search = useSelector((state: IRootState) => state.search);
+  const perPage = useSelector((state: IRootState) => state.perPage);
+  const pageNum = useSelector((state: IRootState) => state.pageNum);
+
+  const response = data;
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     updatePerPage(+e.target.value);
@@ -42,6 +51,7 @@ const Settings = () => {
   }
 
   updatePageNum(nextPageNr ? +nextPageNr - 1 : 1);
+
   return (
     <div className='settings'>
       <select

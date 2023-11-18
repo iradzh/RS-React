@@ -1,16 +1,22 @@
 import './CharacterList.scss';
 
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import gial from '../../assets/gial.png';
-import { AppContext } from '../../context/ContextProvider';
-import { ICharacter } from '../../types/interfaces';
+import { useGetCharsQuery } from '../../store/api';
+import { ICharacter, IRootState } from '../../types/interfaces';
 import { convertUrltoCharId } from '../../util/utilFunctions';
 import Character from '../Character/Charachter';
 
 const CharacterList = () => {
-  const { search, charList, perPage, pageNum } = useContext(AppContext);
+  const { data = [] } = useGetCharsQuery();
+
+  const search = useSelector((state: IRootState) => state.search);
+  const perPage = useSelector((state: IRootState) => state.perPage);
+  const pageNum = useSelector((state: IRootState) => state.pageNum);
+
+  const charList = data.results;
 
   return (
     <div className='char_list'>
@@ -20,7 +26,7 @@ const CharacterList = () => {
           <p>No data available</p>
         </div>
       ) : (
-        charList.slice(0, perPage).map((char: ICharacter, key: number) => (
+        data.results.slice(0, perPage).map((char: ICharacter, key: number) => (
           <Link
             to={`/${pageNum}?perPage=${perPage}${search}&detailId=${convertUrltoCharId(
               char.url
