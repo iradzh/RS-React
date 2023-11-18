@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IActionBool } from '../types/interfaces';
+import { IActionBool } from '../../types/interfaces';
 
 const isMainLoadingSlice = createSlice({
   name: 'isMainLoading',

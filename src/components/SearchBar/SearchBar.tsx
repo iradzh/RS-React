@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { clearSearchValue, setSearchValue } from '../../store/searchSlice';
+import { updatePageNum } from '../../store/slicers/pageNumSlice';
+import {
+  clearSearchValue,
+  setSearchValue
+} from '../../store/slicers/searchSlice';
 import { IRootState } from '../../types/interfaces';
 import ErrorTriggerButton from '../ErrorTrigger/ErrorTrigger';
 
@@ -14,12 +18,13 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     dispatch(setSearchValue(searchWord));
+    dispatch(updatePageNum(1));
   };
 
   const clearSearch = () => {
-    localStorage.clear();
     dispatch(clearSearchValue());
     setSearchWord('');
+    dispatch(updatePageNum(1));
   };
 
   return (

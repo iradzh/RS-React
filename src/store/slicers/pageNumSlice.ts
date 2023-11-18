@@ -5,6 +5,7 @@ const pageNumSlice = createSlice({
   initialState: 1,
   reducers: {
     updatePageNum: (state, action) => {
+      console.log('updatePageNum', action.payload);
       return action.payload;
     }
   }

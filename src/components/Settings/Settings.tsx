@@ -1,27 +1,27 @@
 import './Settings.scss';
 
 import { ChangeEvent } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useGetCharsQuery } from '../../store/api';
-import { updatePageNum } from '../../store/pageNumSlice';
-import { updatePerPage } from '../../store/perPageSlice';
+import { updatePageNum } from '../../store/slicers/pageNumSlice';
+import { updatePerPage } from '../../store/slicers/perPageSlice';
 import { IRootState } from '../../types/interfaces';
 
 const Settings = () => {
   const navigate = useNavigate();
-
-  const { data = [] } = useGetCharsQuery();
+  const dispatch = useDispatch();
 
   const search = useSelector((state: IRootState) => state.search);
   const perPage = useSelector((state: IRootState) => state.perPage);
   const pageNum = useSelector((state: IRootState) => state.pageNum);
 
+  const { data = [] } = useGetCharsQuery(`/?page=${pageNum}`);
   const response = data;
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    updatePerPage(+e.target.value);
+    dispatch(updatePerPage(+e.target.value));
     navigate(`/?perPage=${+e.target.value}`);
   };
 
@@ -52,6 +52,16 @@ const Settings = () => {
 
   updatePageNum(nextPageNr ? +nextPageNr - 1 : 1);
 
+  const handlePrevPage = () => {
+    if (pageNum > 0) {
+      dispatch(updatePageNum(pageNum - 1));
+    }
+  };
+
+  const handleNextPage = () => {
+    dispatch(updatePageNum(pageNum + 1));
+  };
+
   return (
     <div className='settings'>
       <select
@@ -75,6 +85,7 @@ const Settings = () => {
           to={prevPage}
           className={prevUrl ? 'pagination__active' : 'pagination_disabled'}
           data-testid='prevPageBtn'
+          onClick={handlePrevPage}
         >
           &lt;
         </Link>
@@ -83,6 +94,7 @@ const Settings = () => {
           to={nextPage}
           className={nextUrl ? 'pagination__active' : 'pagination_disabled'}
           data-testid='nextPageBtn'
+          onClick={handleNextPage}
         >
           &gt;
         </Link>

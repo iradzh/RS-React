@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { updateDetailsLoading } from './isDetailsLoadingSlice';
-import { updateMainLoading } from './isMainLoadingSlice';
+import { updateDetailsLoading } from './slicers/isDetailsLoadingSlice';
+import { updateMainLoading } from './slicers/isMainLoadingSlice';
 
 export const swapi = createApi({
   reducerPath: 'swapi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api' }),
   endpoints: (build) => ({
     getChars: build.query({
-      query: () => `people`,
+      query: (page) => `people${page}`,
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         dispatch(updateMainLoading(true));
         try {
@@ -30,21 +30,8 @@ export const swapi = createApi({
           dispatch(updateDetailsLoading(false));
         }
       }
-    }),
-    searchChar: build.query({
-      query: (search) => `people/?search=${search}`,
-      async onQueryStarted(id, { dispatch, queryFulfilled }) {
-        dispatch(updateMainLoading(true));
-        try {
-          await queryFulfilled;
-          dispatch(updateMainLoading(false));
-        } catch (err) {
-          dispatch(updateMainLoading(false));
-        }
-      }
     })
   })
 });
 
-export const { useGetCharsQuery, useGetDetailsQuery, useSearchCharQuery } =
-  swapi;
+export const { useGetCharsQuery, useGetDetailsQuery } = swapi;

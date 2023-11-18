@@ -10,11 +10,15 @@ import { convertUrltoCharId } from '../../util/utilFunctions';
 import Character from '../Character/Charachter';
 
 const CharacterList = () => {
-  const { data = [] } = useGetCharsQuery();
-
   const search = useSelector((state: IRootState) => state.search);
   const perPage = useSelector((state: IRootState) => state.perPage);
   const pageNum = useSelector((state: IRootState) => state.pageNum);
+
+  const url = search
+    ? `/?page=${pageNum}&search=${search}`
+    : `/?page=${pageNum}`;
+
+  const { data = [] } = useGetCharsQuery(url);
 
   const charList = data.results;
 

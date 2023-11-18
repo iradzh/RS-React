@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { swapi } from './api';
-import isDetailsLoadingSlice from './isDetailsLoadingSlice';
-import isMainLoadingSlice from './isMainLoadingSlice';
-import pageNumSlice from './pageNumSlice';
-import perPageSlice from './perPageSlice';
-import searchSlice from './searchSlice';
+import isDetailsLoadingSlice from './slicers/isDetailsLoadingSlice';
+import isMainLoadingSlice from './slicers/isMainLoadingSlice';
+import pageNumSlice from './slicers/pageNumSlice';
+import perPageSlice from './slicers/perPageSlice';
+import searchSlice from './slicers/searchSlice';
 
 export const store = configureStore({
   reducer: {
