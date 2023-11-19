@@ -4,20 +4,18 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
-import { loadListSimple } from '../src/api/service';
 import { PageLayout } from '../src/layouts/PageLayout';
 
 test('Make sure the component updates URL query parameter when page changes.', async () => {
   const routes = [
     {
       path: '/:page',
-      element: <PageLayout />,
-      loader: loadListSimple,
-    },
+      element: <PageLayout />
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/1'],
+    initialEntries: ['/1']
   });
 
   render(<RouterProvider router={router} />);

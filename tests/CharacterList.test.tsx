@@ -3,7 +3,6 @@ import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
-import { loadCharacter, loadListSimple } from '../src/api/service';
 import DetailsLayout from '../src/layouts/DetailsLayout';
 import { PageLayout } from '../src/layouts/PageLayout';
 
@@ -12,19 +11,17 @@ test('Verify that the component renders the specified number of cards', async ()
     {
       path: '/:page',
       element: <PageLayout />,
-      loader: loadListSimple,
       children: [
         {
           path: '',
-          element: <DetailsLayout />,
-          loader: loadCharacter,
-        },
-      ],
-    },
+          element: <DetailsLayout />
+        }
+      ]
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/1'],
+    initialEntries: ['/1']
   });
 
   render(<RouterProvider router={router} />);
@@ -37,13 +34,12 @@ test('Check that an appropriate message is displayed if no cards are present', a
   const routes = [
     {
       path: '/:page',
-      element: <PageLayout />,
-      loader: loadListSimple,
-    },
+      element: <PageLayout />
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/999'],
+    initialEntries: ['/999']
   });
 
   render(<RouterProvider router={router} />);

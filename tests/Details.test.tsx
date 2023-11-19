@@ -4,42 +4,39 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
-import { loadCharacter, loadListSimple } from '../src/api/service';
 import DetailsLayout from '../src/layouts/DetailsLayout';
 import { PageLayout } from '../src/layouts/PageLayout';
 
-test('Check that a loading indicator is displayed while fetching data;', async () => {
+test('Ensure that clicking the close button hides the component.', async () => {
   const routes = [
     {
       path: '/:page',
       element: <PageLayout />,
-      loader: loadListSimple,
       children: [
         {
           path: '',
-          element: <DetailsLayout />,
-          loader: loadCharacter,
-        },
-      ],
-    },
+          element: <DetailsLayout />
+        }
+      ]
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/1'],
+    initialEntries: ['/1']
   });
 
   render(<RouterProvider router={router} />);
+  await waitFor(() => screen.getByText('Luke Skywalker'));
 
-  await waitFor(() => screen.getByText('C-3PO'));
-
-  const cardLink = screen.getByText('C-3PO').closest('a');
-
+  const cardLink = screen.getByText('Luke Skywalker').closest('a');
   await userEvent.click(cardLink!);
-  expect(
-    screen.getByText(
-      'The Force will guide us through this delay caused by a sluggish API'
-    )
-  ).toBeInTheDocument();
+
+  await waitFor(() => screen.getByTestId('details'));
+
+  const closeLink = screen.getByTestId('details-close');
+  await userEvent.click(closeLink);
+
+  expect(await screen.queryByTestId('details')).toBeNull();
 });
 
 test('Make sure the detailed card component correctly displays the detailed card data', async () => {
@@ -47,25 +44,23 @@ test('Make sure the detailed card component correctly displays the detailed card
     {
       path: '/:page',
       element: <PageLayout />,
-      loader: loadListSimple,
       children: [
         {
           path: '',
-          element: <DetailsLayout />,
-          loader: loadCharacter,
-        },
-      ],
-    },
+          element: <DetailsLayout />
+        }
+      ]
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/1'],
+    initialEntries: ['/1']
   });
 
   render(<RouterProvider router={router} />);
-  await waitFor(() => screen.getByText('Luke Skywalker'));
+  const element = await screen.findByText('Luke Skywalker');
 
-  const cardLink = screen.getByText('Luke Skywalker').closest('a');
+  const cardLink = element.closest('a');
 
   if (cardLink) {
     await userEvent.click(cardLink);
@@ -84,36 +79,34 @@ test('Make sure the detailed card component correctly displays the detailed card
   }
 });
 
-test('Ensure that clicking the close button hides the component.', async () => {
+test('Check that a loading indicator is displayed while fetching data;', async () => {
   const routes = [
     {
       path: '/:page',
       element: <PageLayout />,
-      loader: loadListSimple,
       children: [
         {
           path: '',
-          element: <DetailsLayout />,
-          loader: loadCharacter,
-        },
-      ],
-    },
+          element: <DetailsLayout />
+        }
+      ]
+    }
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/1'],
+    initialEntries: ['/1']
   });
 
   render(<RouterProvider router={router} />);
-  await waitFor(() => screen.getByText('Luke Skywalker'));
 
-  const cardLink = screen.getByText('Luke Skywalker').closest('a');
+  await waitFor(() => screen.getByText('C-3PO'));
+
+  const cardLink = screen.getByText('C-3PO').closest('a');
+
   await userEvent.click(cardLink!);
-
-  await waitFor(() => screen.getByTestId('details'));
-
-  const closeLink = screen.getByTestId('details-close');
-  await userEvent.click(closeLink);
-
-  expect(await screen.queryByTestId('details')).toBeNull();
+  expect(
+    screen.getByText(
+      'The Force will guide us through this delay caused by a sluggish API'
+    )
+  ).toBeInTheDocument();
 });

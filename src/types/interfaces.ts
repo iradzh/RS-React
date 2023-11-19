@@ -14,7 +14,7 @@ export interface ICharacter {
 }
 
 export interface IErrBoundProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface IErrBoundState {
@@ -52,6 +52,7 @@ export interface IRootState {
   pageNum: number;
   isMainLoading: boolean;
   isDetailsLoading: boolean;
+  isError: boolean;
 }
 
 export interface IActionBool {

@@ -50,8 +50,6 @@ const Settings = () => {
       : `?search=${search}`;
   }
 
-  updatePageNum(nextPageNr ? +nextPageNr - 1 : 1);
-
   const handlePrevPage = () => {
     if (pageNum > 0) {
       dispatch(updatePageNum(pageNum - 1));
