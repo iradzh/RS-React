@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -8,12 +8,12 @@ const Home = () => {
         <Link to="/" className="homeLink">
           HOME
         </Link>
-        <Link to="/uncontrolled" className="navLink">
+        <NavLink to="/uncontrolled" className="navLink">
           FormUncontr
-        </Link>
-        <Link to="/usehook" className="navLink">
+        </NavLink>
+        <NavLink to="/usehook" className="navLink">
           FormWithHook
-        </Link>
+        </NavLink>
       </nav>
       <Outlet />
     </div>
