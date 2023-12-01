@@ -6,16 +6,18 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import Home from './pages/Home';
 import FormWithHook from './components/FormWithHook/FormWithHook';
 import FormUncontr from './components/FormUncontr/FormUncontr';
 import NotFoundPage from './pages/NotFoundPage';
 
 import './index.scss';
+import { PageLayout } from './layouts/PageLayout';
+import { RootLayout } from './layouts/RootLayout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Home />}>
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<PageLayout />} />
       <Route path="/uncontrolled" element={<FormUncontr />} />
       <Route path="/usehook" element={<FormWithHook />} />
       <Route path="*" element={<NotFoundPage />} />
