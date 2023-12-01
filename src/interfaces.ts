@@ -18,3 +18,17 @@ export interface IUncInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface IHookDataProp {
+  form: string;
+}
+
+export enum TableForm {
+  HOOK = 'React Hook Form',
+  UNC = 'Uncontrolled Form',
+}
+
+export interface ITableValues {
+  uncontrForm: IFormValues;
+  useFormData: IFormValues;
+}

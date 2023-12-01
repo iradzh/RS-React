@@ -54,11 +54,8 @@ nav {
   justify-content: space-between;
   align-content: center;
   padding: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 380px;
+  margin: 2em auto;
+  width: 480px;
   border: 2px solid #1717f1;
   border-radius: 15px;
   background-color: #ffffff;
@@ -66,6 +63,7 @@ nav {
   h1 {
     color: #1717f1;
     text-align: center;
+    margin: 0;
   }
 
   & input {
@@ -114,4 +112,11 @@ nav {
 .col-2 {
   display: flex;
   justify-content: space-between;
+}
+
+.tables {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2em auto;
+  gap: 3em;
 }

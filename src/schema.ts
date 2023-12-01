@@ -12,14 +12,13 @@ export const schema = yup.object({
       }
     ),
 
-  age: yup.number().test('positive', 'Age must be positive', (value) => {
-    if (value! < 0) return false;
-  }),
+  age: yup.number().positive().integer(),
 
-  password: yup
-    .string()
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/,
-      'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character'
-    ),
+  email: yup.string().email().required(),
+
+  password: yup.string().email().required(),
+
+  gender: yup.string().required(),
+
+  tc: yup.boolean().required(),
 });

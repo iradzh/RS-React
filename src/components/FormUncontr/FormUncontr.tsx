@@ -1,6 +1,10 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import FormInput from './FormInput';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUncontrData } from '../../store/slicers/uncontrFormSlice';
+import { TableForm } from '../../interfaces';
 
 const schema = yup.object({
   name: yup
@@ -24,6 +28,9 @@ const schema = yup.object({
 });
 
 const FormUncontr = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -49,7 +56,16 @@ const FormUncontr = () => {
 
     try {
       schema.validateSync(values, { abortEarly: false });
-      console.log('Form data is valid:', values);
+      dispatch(
+        setUncontrData({
+          name: values.name,
+          email: values.email,
+          // age: values.age,
+          // gender: values.gender,
+          // tc: values.tc,
+        })
+      );
+      navigate('/');
     } catch (validationError) {
       console.error('Form validation errors:', validationError);
     }
@@ -61,7 +77,7 @@ const FormUncontr = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <h1>Uncontrolled Form</h1>
+      <h1>{TableForm.UNC}</h1>
       {inputs.map((input) => (
         <FormInput
           key={input.id}
