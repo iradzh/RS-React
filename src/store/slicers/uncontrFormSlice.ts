@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const uncontrForm = createSlice({
   name: 'uncontrForm',
   initialState: {
-    name: 'OTHER',
-    age: 1,
+    name: '',
+    age: 0,
     email: '',
     password: '',
     gender: '',

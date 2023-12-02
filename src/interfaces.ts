@@ -3,6 +3,7 @@ export interface IFormValues {
   age: number;
   email: string;
   password: string;
+  // passwordConfirmed: string;
   gender: string;
   tc: boolean;
 }

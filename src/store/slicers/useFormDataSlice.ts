@@ -4,7 +4,7 @@ const useFormData = createSlice({
   name: 'useFormData',
   initialState: {
     name: '',
-    age: 1,
+    age: 0,
     email: '',
     password: '',
     gender: '',

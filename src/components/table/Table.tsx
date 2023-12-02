@@ -9,46 +9,48 @@ const Table = (prop: IHookDataProp) => {
   const tablePrefix =
     prop.form === TableForm.HOOK ? TableForm.HOOK : TableForm.UNC;
 
+  const age =
+    prop.form === TableForm.UNC ? data.uncontrForm.age : data.useFormData.age;
+  const displayedAge = age || '';
+
+  const tc =
+    prop.form === TableForm.UNC ? data.uncontrForm.tc : data.useFormData.tc;
+  const displayedtc = tc ? 'Yes' : 'No';
+
   const [table] = useState([
     {
       id: tablePrefix + '_1',
       col1: 'Name: ',
       col2:
-        prop.form === TableForm.HOOK
+        prop.form === TableForm.UNC
           ? data.uncontrForm.name
           : data.useFormData.name,
     },
     {
       id: tablePrefix + '_2',
       col1: 'Age: ',
-      col2:
-        prop.form === TableForm.HOOK
-          ? data.useFormData.age
-          : data.uncontrForm.age,
+      col2: displayedAge,
     },
     {
       id: tablePrefix + '_3',
       col1: 'E-mail: ',
       col2:
-        prop.form === TableForm.HOOK
-          ? data.useFormData.email
-          : data.uncontrForm.email,
+        prop.form === TableForm.UNC
+          ? data.uncontrForm.email
+          : data.useFormData.email,
     },
     {
       id: tablePrefix + '_4',
       col1: 'Gender: ',
       col2:
-        prop.form === TableForm.HOOK
-          ? data.useFormData.gender
-          : data.uncontrForm.gender,
+        prop.form === TableForm.UNC
+          ? data.uncontrForm.gender
+          : data.useFormData.gender,
     },
     {
       id: tablePrefix + '_5',
       col1: 'TC: ',
-      col2:
-        prop.form === TableForm.HOOK
-          ? data.useFormData.tc
-          : data.uncontrForm.tc,
+      col2: displayedtc,
     },
   ]);
 
