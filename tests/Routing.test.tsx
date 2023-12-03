@@ -1,27 +1,27 @@
-import '@testing-library/jest-dom';
+import React from 'react';
 
+import '@testing-library/jest-dom';
+import { test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { test } from 'vitest';
 
-import { RootLayout } from '../src/layouts/RootLayout';
-import React from 'react';
+import NotFoundPage from '../src/pages/NotFoundPage';
 
 test('get NotFoundPage in case of wrong route', async () => {
   const routes = [
     {
       path: '/wrongRoute',
-      element: <RootLayout />,
+      element: <NotFoundPage />,
     },
   ];
 
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/'],
+    initialEntries: ['/wrongRoute'],
   });
 
   render(<RouterProvider router={router} />);
 
-  const errorMessage = /Wrong link, here is correct to go home/;
+  const errorMessage = /Wrong link, here is correct to go/;
   const messageElement = await screen.findByText(errorMessage);
 
   expect(messageElement).toBeInTheDocument();

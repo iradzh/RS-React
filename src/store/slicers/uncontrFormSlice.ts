@@ -7,6 +7,7 @@ const uncontrForm = createSlice({
     age: 0,
     email: '',
     password: '',
+    passwordConfirmed: '',
     gender: '',
     tc: false,
   },

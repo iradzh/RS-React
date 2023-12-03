@@ -7,6 +7,7 @@ import { setUseFormData } from '../../store/slicers/useFormDataSlice';
 import { IFormValues, TableForm } from '../../interfaces';
 import { schema } from '../../schema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import '../Form.scss';
 
 const FormWithHook = () => {
   const navigate = useNavigate();
@@ -28,9 +29,12 @@ const FormWithHook = () => {
     dispatch(
       setUseFormData({
         name: data.name,
-        email: data.email,
         age: data.age,
+        email: data.email,
+        password: data.password,
+        passwordConfirmed: data.passwordConfirmed,
         gender: data.gender,
+        pic: data.pic,
         tc: data.tc,
       })
     );
@@ -43,22 +47,21 @@ const FormWithHook = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="form" noValidate>
         <h1>{TableForm.HOOK}</h1>
 
-        <div className="form-control">
+        <div className="input_wrapper">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" {...register('name')} />
-
           {errors.name && (
             <p className="error-message">{errors.name.message}</p>
           )}
         </div>
 
-        <div className="form-control">
+        <div className="input_wrapper">
           <label htmlFor="age">Age</label>
           <input type="number" id="age" {...register('age')} />
           {errors.age && <p className="error-message">{errors.age.message}</p>}
         </div>
 
-        <div className="form-control">
+        <div className="input_wrapper">
           <label htmlFor="email">E-mail</label>
           <input type="email" id="email" {...register('email')} />
           {errors.email && (
@@ -66,7 +69,7 @@ const FormWithHook = () => {
           )}
         </div>
 
-        <div className="form-control">
+        <div className="input_wrapper">
           <label htmlFor="password">Password</label>
           <input type="password" id="password" {...register('password')} />
           {errors.password && (
@@ -74,31 +77,54 @@ const FormWithHook = () => {
           )}
         </div>
 
-        <div className="gender">
-          <label htmlFor="she">Female</label>
-          <input type="radio" id="she" {...register('gender')} value="she" />
+        <div className="input_wrapper">
+          <label htmlFor="passwordConfirmed">Confirm password</label>
+          <input
+            type="password"
+            id="passwordConfirmed"
+            {...register('passwordConfirmed')}
+          />
+          {errors.passwordConfirmed && (
+            <p className="error-message">{errors.passwordConfirmed.message}</p>
+          )}
         </div>
 
-        <div className="gender">
-          <label htmlFor="he">Male</label>
-          <input type="radio" id="he" {...register('gender')} value="he" />
-        </div>
+        <div className="gender__wrapper">
+          <div className="gender">
+            <label htmlFor="she">Female</label>
+            <input type="radio" id="she" {...register('gender')} value="she" />
+          </div>
 
-        <div className="gender">
-          <label htmlFor="they">Prefer not to say</label>
-          <input type="radio" id="they" {...register('gender')} value="they" />
+          <div className="gender">
+            <label htmlFor="he">Male</label>
+            <input type="radio" id="he" {...register('gender')} value="he" />
+          </div>
+
+          <div className="gender">
+            <label htmlFor="they">Prefer not to say</label>
+            <input
+              type="radio"
+              id="they"
+              {...register('gender')}
+              value="they"
+            />
+          </div>
         </div>
         {errors.gender && (
           <p className="error-message">{errors.gender.message}</p>
         )}
 
-        <div className="col-2">
-          <label htmlFor="tc">I accept T&C</label>
-          <input type="checkbox" id="tc" {...register('tc')} />
+        <div className="attach">
+          <label htmlFor="pic" className="custom-file-upload">
+            Attach image
+          </label>
+          <input id="pic" type="file" {...register('pic')} />
         </div>
 
-        {/* <label>Attach image</label>
-        <input type="file" /> */}
+        <div className="tc">
+          <label htmlFor="tc">I accept Terms and Conditions</label>
+          <input type="checkbox" id="tc" {...register('tc')} />
+        </div>
 
         <button type="submit">Submit</button>
       </form>

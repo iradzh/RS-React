@@ -25,18 +25,23 @@ export const schema: yup.ObjectSchema<IFormValues> = yup.object({
 
   password: yup
     .string()
-    .min(4, 'Password should be at least 4 characters')
-    .max(20)
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{4,}$/,
-      'Should contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character'
+      'Password should contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character'
     )
     .required('Password is required!'),
+
+  passwordConfirmed: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Passwords should match!')
+    .required('Password confirmation is required!'),
 
   gender: yup
     .string()
     .oneOf(['she', 'he', 'they'], 'Please select a gender')
     .required('Gender is required'),
+
+  pic: yup.string().required('Image is required!'),
 
   tc: yup.boolean().required(),
 });

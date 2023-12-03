@@ -7,7 +7,9 @@ const useFormData = createSlice({
     age: 0,
     email: '',
     password: '',
+    passwordConfirmed: '',
     gender: '',
+    pic: '',
     tc: false,
   },
   reducers: {
