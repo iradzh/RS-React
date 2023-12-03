@@ -2,9 +2,10 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUncontrData } from '../../store/slicers/uncontrFormSlice';
-import { TableForm } from '../../interfaces';
+import { IFormValues, TableForm } from '../../interfaces';
 import '../Form.scss';
-import { schema } from '../../validation/schema';
+import { schema } from '../../util/schema';
+import { toBase64 } from '../../util/base64';
 
 type FormErrors = {
   name?: string;
@@ -25,15 +26,15 @@ const FormUncontr = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState<IFormValues>({
     name: '',
-    age: '',
+    age: 0,
     email: '',
     password: '',
     passwordConfirmed: '',
     gender: '',
-    pic: '',
     tc: false,
+    pic: undefined,
   });
 
   const [formErrors, setFormErrors] = useState({
@@ -50,16 +51,33 @@ const FormUncontr = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === 'checkbox' ? checked : value;
-    setFormData((prevData) => ({ ...prevData, [name]: inputValue }));
+    setData((prevData) => ({ ...prevData, [name]: inputValue }));
+  };
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    setData((prevData) => ({ ...prevData, [name]: e.target.files }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     schema
-      .validate(formData, { abortEarly: false })
-      .then(() => {
-        dispatch(setUncontrData(formData));
+      .validate(data, { abortEarly: false })
+      .then(async () => {
+        dispatch(
+          setUncontrData({
+            isInitialised: true,
+            name: data.name,
+            age: data.age,
+            email: data.email,
+            password: data.password,
+            passwordConfirmed: data.passwordConfirmed,
+            gender: data.gender,
+            pic: await toBase64(data.pic![0]),
+            tc: data.tc,
+          })
+        );
         navigate('/');
       })
       .catch((validationErrors) => {
@@ -87,7 +105,7 @@ const FormUncontr = () => {
           type="text"
           id="name"
           name="name"
-          value={formData.name}
+          value={data.name}
           onChange={handleChange}
         />
         {formErrors.name && <p className="error-message">{formErrors.name}</p>}
@@ -99,7 +117,7 @@ const FormUncontr = () => {
           type="number"
           id="age"
           name="age"
-          value={formData.age}
+          value={data.age != 0 ? data.age : ''}
           onChange={handleChange}
         />
         {formErrors.age && <p className="error-message">{formErrors.age}</p>}
@@ -111,7 +129,7 @@ const FormUncontr = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
+          value={data.email}
           onChange={handleChange}
         />
         {formErrors.email && (
@@ -125,7 +143,7 @@ const FormUncontr = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
+          value={data.password}
           onChange={handleChange}
         />
         {formErrors.password && (
@@ -139,7 +157,7 @@ const FormUncontr = () => {
           type="password"
           id="passwordConfirmed"
           name="passwordConfirmed"
-          value={formData.passwordConfirmed}
+          value={data.passwordConfirmed}
           onChange={handleChange}
         />
         {formErrors.passwordConfirmed && (
@@ -155,7 +173,7 @@ const FormUncontr = () => {
             id="she"
             name="gender"
             value="she"
-            checked={formData.gender === 'she'}
+            checked={data.gender === 'she'}
             onChange={handleChange}
           />
         </div>
@@ -167,7 +185,7 @@ const FormUncontr = () => {
             id="he"
             name="gender"
             value="he"
-            checked={formData.gender === 'he'}
+            checked={data.gender === 'he'}
             onChange={handleChange}
           />
         </div>
@@ -179,7 +197,7 @@ const FormUncontr = () => {
             id="they"
             name="gender"
             value="they"
-            checked={formData.gender === 'they'}
+            checked={data.gender === 'they'}
             onChange={handleChange}
           />
         </div>
@@ -193,8 +211,16 @@ const FormUncontr = () => {
         <label htmlFor="pic" className="custom-file-upload">
           Attach image
         </label>
-        <input id="pic" type="file" name="pic" value={formData.pic} />
+        <input
+          id="pic"
+          type="file"
+          name="pic"
+          // value={data.pic}
+          onChange={handleFileChange}
+        />
       </div>
+
+      {formErrors.pic && <p className="error-message">{formErrors.pic}</p>}
 
       <div className="tc">
         <label htmlFor="tc">I accept Terms and Conditions</label>

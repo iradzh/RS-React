@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setHookData } from '../../store/slicers/hookDataSlice';
 import { IFormValues, TableForm } from '../../interfaces';
-import { schema } from '../../validation/schema';
+import { schema } from '../../util/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import '../Form.scss';
-import { toBase64 } from './base64';
+import { toBase64 } from '../../util/base64';
 
 const FormWithHook = () => {
   const navigate = useNavigate();
