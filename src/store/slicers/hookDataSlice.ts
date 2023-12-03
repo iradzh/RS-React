@@ -16,6 +16,7 @@ const hookData = createSlice({
   } as IDisplayValue,
   reducers: {
     setHookData: (state, action) => {
+      console.log(state);
       return action.payload;
     },
   },

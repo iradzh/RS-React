@@ -57,11 +57,10 @@ export const schema: yup.ObjectSchema<IFormValues> = yup.object({
     .test('fileSize', 'File size too large. Maximum size is 10MB.', (value) => {
       if (value && value[0]) {
         const file = value![0];
-        console.log(file);
 
         return value && file.size <= 10485760;
       }
     }),
 
-  tc: yup.boolean().required(),
+  tc: yup.boolean().required('Please, accept T&C!'),
 });

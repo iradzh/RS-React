@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
@@ -46,12 +45,22 @@ const FormWithHook = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="form" noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="form"
+        noValidate
+        autoComplete="on"
+      >
         <h1>{TableForm.HOOK}</h1>
 
         <div className="input_wrapper">
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" {...register('name')} />
+          <input
+            type="text"
+            id="name"
+            {...register('name')}
+            autoComplete="name"
+          />
           {errors.name && (
             <p className="error-message">{errors.name.message}</p>
           )}
@@ -59,7 +68,12 @@ const FormWithHook = () => {
 
         <div className="input_wrapper">
           <label htmlFor="age">Age</label>
-          <input type="number" id="age" {...register('age')} />
+          <input
+            type="number"
+            id="age"
+            {...register('age')}
+            autoComplete="age"
+          />
           {errors.age && <p className="error-message">{errors.age.message}</p>}
         </div>
 
@@ -73,7 +87,12 @@ const FormWithHook = () => {
 
         <div className="input_wrapper">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" {...register('password')} />
+          <input
+            type="password"
+            id="password"
+            {...register('password')}
+            autoComplete="off"
+          />
           {errors.password && (
             <p className="error-message">{errors.password.message}</p>
           )}
@@ -85,6 +104,7 @@ const FormWithHook = () => {
             type="password"
             id="passwordConfirmed"
             {...register('passwordConfirmed')}
+            autoComplete="off"
           />
           {errors.passwordConfirmed && (
             <p className="error-message">{errors.passwordConfirmed.message}</p>
@@ -128,6 +148,7 @@ const FormWithHook = () => {
           <label htmlFor="tc">I accept Terms and Conditions</label>
           <input type="checkbox" id="tc" {...register('tc')} />
         </div>
+        {errors.tc && <p className="error-message">{errors.tc.message}</p>}
 
         <button type="submit">Submit</button>
       </form>

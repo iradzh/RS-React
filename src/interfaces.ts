@@ -51,3 +51,18 @@ export interface IPicValidation {
   type: string;
   size: number;
 }
+
+export type FormErrors = {
+  name?: string;
+  age?: string;
+  email?: string;
+  password?: string;
+  passwordConfirmed?: string;
+  gender?: string;
+  tc?: string | boolean;
+};
+
+export interface ValidationError {
+  path: string;
+  message: string;
+}

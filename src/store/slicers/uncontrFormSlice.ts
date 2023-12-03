@@ -15,6 +15,7 @@ const uncontrForm = createSlice({
   } as IDisplayValue,
   reducers: {
     setUncontrData: (state, action) => {
+      console.log(state);
       return action.payload;
     },
   },

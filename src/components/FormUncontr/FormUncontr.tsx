@@ -1,26 +1,16 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUncontrData } from '../../store/slicers/uncontrFormSlice';
-import { IFormValues, TableForm } from '../../interfaces';
+import {
+  FormErrors,
+  IFormValues,
+  TableForm,
+  ValidationError,
+} from '../../interfaces';
 import '../Form.scss';
 import { schema } from '../../util/schema';
 import { toBase64 } from '../../util/base64';
-
-type FormErrors = {
-  name?: string;
-  age?: string;
-  email?: string;
-  password?: string;
-  passwordConfirmed?: string;
-  gender?: string;
-  tc?: string | boolean;
-};
-
-interface ValidationError {
-  path: string;
-  message: string;
-}
 
 const FormUncontr = () => {
   const dispatch = useDispatch();

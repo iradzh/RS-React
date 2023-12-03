@@ -1,4 +1,3 @@
-import React from 'react';
 import { ITableValues, TableForm } from '../interfaces';
 import Table from '../components/Table/Table';
 import { useSelector } from 'react-redux';
