@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUncontrData } from '../../store/slicers/uncontrFormSlice';
 import { TableForm } from '../../interfaces';
 import '../Form.scss';
-import { schema } from '../../schema';
+import { schema } from '../../validation/schema';
 
 type FormErrors = {
   name?: string;
@@ -32,6 +32,7 @@ const FormUncontr = () => {
     password: '',
     passwordConfirmed: '',
     gender: '',
+    pic: '',
     tc: false,
   });
 
@@ -42,6 +43,7 @@ const FormUncontr = () => {
     password: '',
     passwordConfirmed: '',
     gender: '',
+    pic: '',
     tc: false,
   });
 
@@ -191,7 +193,7 @@ const FormUncontr = () => {
         <label htmlFor="pic" className="custom-file-upload">
           Attach image
         </label>
-        <input id="pic" type="file" />
+        <input id="pic" type="file" name="pic" value={formData.pic} />
       </div>
 
       <div className="tc">

@@ -10,11 +10,11 @@ const Table = (prop: IHookDataProp) => {
     prop.form === TableForm.HOOK ? TableForm.HOOK : TableForm.UNC;
 
   const age =
-    prop.form === TableForm.UNC ? data.uncontrForm.age : data.useFormData.age;
+    prop.form === TableForm.UNC ? data.uncontrForm.age : data.hookData.age;
   const displayedAge = age || '';
 
   const tc =
-    prop.form === TableForm.UNC ? data.uncontrForm.tc : data.useFormData.tc;
+    prop.form === TableForm.UNC ? data.uncontrForm.tc : data.hookData.tc;
   const displayedtc = tc ? 'Yes' : 'No';
 
   const [table] = useState([
@@ -24,7 +24,7 @@ const Table = (prop: IHookDataProp) => {
       col2:
         prop.form === TableForm.UNC
           ? data.uncontrForm.name
-          : data.useFormData.name,
+          : data.hookData.name,
     },
     {
       id: tablePrefix + '_2',
@@ -37,7 +37,7 @@ const Table = (prop: IHookDataProp) => {
       col2:
         prop.form === TableForm.UNC
           ? data.uncontrForm.email
-          : data.useFormData.email,
+          : data.hookData.email,
     },
     {
       id: tablePrefix + '_4',
@@ -45,12 +45,22 @@ const Table = (prop: IHookDataProp) => {
       col2:
         prop.form === TableForm.UNC
           ? data.uncontrForm.gender
-          : data.useFormData.gender,
+          : data.hookData.gender,
     },
     {
       id: tablePrefix + '_5',
       col1: 'TC: ',
       col2: displayedtc,
+    },
+    {
+      id: tablePrefix + '_6',
+      col1: 'Image: ',
+      col2:
+        prop.form === TableForm.UNC ? (
+          <img className="pic" src={data.uncontrForm.pic} />
+        ) : (
+          <img className="pic" src={data.hookData.pic} />
+        ),
     },
   ]);
 

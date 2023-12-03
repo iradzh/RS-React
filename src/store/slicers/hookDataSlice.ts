@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IDisplayValue } from '../../interfaces';
 
-const uncontrForm = createSlice({
-  name: 'uncontrForm',
+const hookData = createSlice({
+  name: 'hookData',
   initialState: {
     isInitialised: false,
     name: '',
@@ -11,15 +11,16 @@ const uncontrForm = createSlice({
     password: '',
     passwordConfirmed: '',
     gender: '',
+    pic: '',
     tc: false,
   } as IDisplayValue,
   reducers: {
-    setUncontrData: (state, action) => {
+    setHookData: (state, action) => {
       return action.payload;
     },
   },
 });
 
-export const { setUncontrData } = uncontrForm.actions;
+export const { setHookData } = hookData.actions;
 
-export default uncontrForm.reducer;
+export default hookData.reducer;

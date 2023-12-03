@@ -3,11 +3,12 @@ import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUseFormData } from '../../store/slicers/useFormDataSlice';
+import { setHookData } from '../../store/slicers/hookDataSlice';
 import { IFormValues, TableForm } from '../../interfaces';
-import { schema } from '../../schema';
+import { schema } from '../../validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import '../Form.scss';
+import { toBase64 } from './base64';
 
 const FormWithHook = () => {
   const navigate = useNavigate();
@@ -25,21 +26,22 @@ const FormWithHook = () => {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<IFormValues> = (data) => {
+  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
     dispatch(
-      setUseFormData({
+      setHookData({
+        isInitialised: true,
         name: data.name,
         age: data.age,
         email: data.email,
         password: data.password,
         passwordConfirmed: data.passwordConfirmed,
         gender: data.gender,
-        pic: data.pic,
+        pic: await toBase64(data.pic![0]),
         tc: data.tc,
       })
     );
-    navigate('/');
     reset();
+    navigate('/');
   };
 
   return (
@@ -120,6 +122,7 @@ const FormWithHook = () => {
           </label>
           <input id="pic" type="file" {...register('pic')} />
         </div>
+        {errors.pic && <p className="error-message">{errors.pic.message}</p>}
 
         <div className="tc">
           <label htmlFor="tc">I accept Terms and Conditions</label>

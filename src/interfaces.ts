@@ -5,6 +5,18 @@ export interface IFormValues {
   password: string;
   passwordConfirmed: string;
   gender: string;
+  pic?: FileList;
+  tc: boolean;
+}
+
+export interface IDisplayValue {
+  isInitialised: boolean;
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  passwordConfirmed: string;
+  gender: string;
   pic?: string;
   tc: boolean;
 }
@@ -31,6 +43,11 @@ export enum TableForm {
 }
 
 export interface ITableValues {
-  uncontrForm: IFormValues;
-  useFormData: IFormValues;
+  uncontrForm: IDisplayValue;
+  hookData: IDisplayValue;
+}
+
+export interface IPicValidation {
+  type: string;
+  size: number;
 }

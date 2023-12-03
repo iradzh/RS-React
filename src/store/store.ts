@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import useFormDataSlice from './slicers/useFormDataSlice';
+import hookDataSlice from './slicers/hookDataSlice';
 import uncontrFormSlice from './slicers/uncontrFormSlice';
 
 export const store = configureStore({
   reducer: {
-    useFormData: useFormDataSlice,
+    hookData: hookDataSlice,
     uncontrForm: uncontrFormSlice,
   },
 });

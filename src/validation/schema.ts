@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { IFormValues } from './interfaces';
+import { IFormValues } from '../interfaces';
 
 export const schema: yup.ObjectSchema<IFormValues> = yup.object({
   name: yup
@@ -8,7 +8,6 @@ export const schema: yup.ObjectSchema<IFormValues> = yup.object({
       'capitalizeFirstLetter',
       'First letter must be capitalized',
       (value) => {
-        console.log('nameVal', value);
         if (!value) {
           return false;
         }
@@ -40,7 +39,27 @@ export const schema: yup.ObjectSchema<IFormValues> = yup.object({
     .oneOf(['she', 'he', 'they'], 'Please select a gender')
     .required('Gender is required'),
 
-  pic: yup.string().required('Image is required!'),
+  pic: yup
+    .mixed<FileList>()
+    .test(
+      'fileType',
+      'Invalid file type. Only PNG or JPEG allowed.',
+      (value) => {
+        if (value && value[0]) {
+          const file = value![0];
+
+          return (
+            value && (file.type === 'image/png' || file.type === 'image/jpeg')
+          );
+        }
+      }
+    )
+    .test('fileSize', 'File size too large. Maximum size is 10MB.', (value) => {
+      if (value && value[0]) {
+        const file = value![0];
+        return value && file.size <= 10485760;
+      }
+    }),
 
   tc: yup.boolean().required(),
 });
