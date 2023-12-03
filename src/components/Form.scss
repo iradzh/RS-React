@@ -1,0 +1,123 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px;
+  margin: 2em auto;
+  width: 480px;
+  border: 2px solid #1717f1;
+  border-radius: 15px;
+  background-color: #ffffff;
+
+  h1 {
+    color: #1717f1;
+    text-align: center;
+    margin: 0;
+  }
+
+  & input {
+    border: 2px solid rgb(120, 120, 120);
+    border-radius: 8px;
+    height: 2em;
+    padding: 6px;
+    margin: 10px 0px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  button {
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(235, 235, 235);
+    padding: 10px 8px;
+    font-weight: 600;
+    transition: all ease 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(199, 199, 199);
+    }
+    &:active {
+      background-color: #1717f1;
+      color: #fff;
+    }
+  }
+}
+
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.col-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tables {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2em auto;
+  gap: 3em;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.gender__wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.tc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  background-color: #1717f12c;
+  border-radius: 9px;
+  margin: 0 0 1.4em 0;
+}
+
+.attach {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+
+  input[type='file'] {
+    display: none;
+  }
+
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 1em auto;
+    color: #fff;
+    border-radius: 9px;
+    font-weight: 700;
+    background-color: #1717f1;
+    cursor: pointer;
+  }
+}
