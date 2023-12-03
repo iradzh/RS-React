@@ -13,7 +13,6 @@ export const schema: yup.ObjectSchema<IFormValues> = yup.object({
           return false;
         }
 
-        console.log('name', value[0] === value[0].toUpperCase());
         return value[0] === value[0].toUpperCase();
       }
     )

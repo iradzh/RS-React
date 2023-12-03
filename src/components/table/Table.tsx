@@ -15,7 +15,7 @@ const Table = (prop: IHookDataProp) => {
 
   const tc =
     prop.form === TableForm.UNC ? data.uncontrForm.tc : data.useFormData.tc;
-  const displayedtc = tc ? 'Yes' : '';
+  const displayedtc = tc ? 'Yes' : 'No';
 
   const [table] = useState([
     {

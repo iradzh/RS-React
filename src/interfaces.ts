@@ -5,7 +5,7 @@ export interface IFormValues {
   password: string;
   passwordConfirmed: string;
   gender: string;
-  pic: string;
+  pic?: string;
   tc: boolean;
 }
 

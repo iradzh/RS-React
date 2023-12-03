@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableForm } from '../interfaces';
-import Table from '../components/table/Table';
+import Table from '../components/Table/Table';
 
 const Home = () => {
   return (
